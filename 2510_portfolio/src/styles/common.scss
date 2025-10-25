@@ -1,0 +1,36 @@
+@charset 'utf-8';
+
+/**
+ * common.scss
+**/
+
+// components
+@use './components/parts' as *;
+@use './components/list' as *;
+
+// layout
+@use './layout/layout' as *;
+@use './layout/theme' as *;
+
+// helper
+@use './helper/function' as *;
+// @use './helper/mixin' as *;
+
+// setting
+@use './setting/var' as *;
+@use './setting/reset' as *;
+
+// font
+@font-face {
+  font-family: 'PretendardVariable';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono-Variable.ttf') format('ttf');
+  font-weight: 100 700;
+  font-display: swap;
+}

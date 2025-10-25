@@ -1,0 +1,54 @@
+@charset 'utf-8';
+
+@use 'styles/helper/mixin';
+@use 'styles/setting/var' as *;
+
+/**
+ * 레이아웃
+**/
+
+* {
+  font-family: $font_primary;
+}
+
+:root {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  body {
+    @include mixin.font(400 '1.4rem/1.47');
+  }
+}
+
+#root, .hwiView {
+  position: relative;
+  height: 100%;
+}
+
+// 본문바로가기
+.hwiSkip {
+  position: absolute;
+  z-index: 3100;
+  top: 0;
+  left: 0;
+  font-size: 0;
+  line-height: 1;
+}
+
+// 컨텐츠 view
+.hwiView {
+  position: relative;
+  // display: grid;
+  // grid-template-rows: 15rem 1fr;
+
+  .hwiInner {
+    position: relative;
+    margin: 0 auto;
+    width: 136rem;
+  }
+}
+
+// 공통 타이틀
+.hwiTitle {
+  margin-bottom: 4rem;
+  @include mixin.font(700 '5.5rem/1.4');
+}
