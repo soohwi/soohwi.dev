@@ -1,0 +1,33 @@
+@charset 'utf-8';
+
+@use 'styles/helper/mixin';
+@use 'styles/setting/var' as *;
+
+/**
+ * components/sections
+ * home/home.module.scss
+**/
+
+.home {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  @include mixin.font('1.5rem' center);
+  // background-image: radial-gradient(circle, #f5f5f7, #ebe9f8, #e3ddf9, #dcd1f8, $color_main);
+  background-image: linear-gradient(to top, $color_bg, #ebe9f8, #e3ddf9, #dcd1f8, $color_main);
+  // background-image: linear-gradient(to right top, $color_bg, #ebe9f8, #e3ddf9, #dcd1f8, $color_main);
+
+  // light: #F5F5F7, #D8C4F6
+  // dark: #282D36, #0A153D
+  // background-image: linear-gradient(to right top, #282d36, #1f2839, #17223b, #101c3c, #0a153d);
+
+  // 타이틀
+  &Title {
+    //reload 효과 넣기
+    @include mixin.font(700 '13rem' );
+  }
+
+  &Inner {
+
+  }
+}
