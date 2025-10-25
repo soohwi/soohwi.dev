@@ -1,0 +1,62 @@
+@charset 'utf-8';
+
+@use 'styles/helper/mixin';
+@use 'styles/setting/var' as *;
+
+/**
+ * components/layout
+ * header.module.scss
+**/
+
+.header {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 1rem 0;
+  // @include mixin.transform(translateY(-100%));
+  @include mixin.transition(transform .4s ease-in-out);
+
+  &.on {
+    // @include mixin.transform(translateY(0));
+  }
+
+  &Inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    width: min(70vw, 110rem);
+    border-radius: 1.5rem;
+    background-color: rgba($color_main, .7);
+    backdrop-filter: blur(3px);
+    @include mixin.transition(all .3s);
+
+    &:hover {
+      background-color: $color_main;
+    }
+
+    // 로고
+    .logo {
+      @include mixin.font('2rem' [$font_mono]);
+    }
+
+    // GNB
+    .gnb {
+      &List {
+        display: flex;
+        gap: 0 1.2rem;
+
+        a {
+          padding: 1rem 0;
+          font-family: $font_mono;
+
+          &:hover {
+            color: blue;
+          }
+        }
+      }
+    }
+  }
+}

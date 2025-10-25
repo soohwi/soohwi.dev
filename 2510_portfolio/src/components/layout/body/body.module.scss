@@ -1,0 +1,23 @@
+@charset 'utf-8';
+
+@use 'styles/helper/mixin';
+@use 'styles/setting/var' as *;
+
+/**
+ * components/layout
+ * header.module.scss
+**/
+
+.page {
+  display: flex;
+  position: relative;
+  // padding-bottom: 289px;
+  min-height: 100%;
+
+  &Content {
+    flex: auto;
+    align-self: center;
+    width: 100%;
+    min-width: 0;
+  }
+}
