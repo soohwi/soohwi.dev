@@ -1,0 +1,71 @@
+@charset 'utf-8';
+
+@use 'styles/helper/mixin';
+@use 'styles/setting/var' as *;
+
+/**
+ * components/sections
+ * skills/skills.module.scss
+**/
+
+.skills {
+  padding-block: 12rem;
+  background-color: $color_bg;
+
+  //< 레이아웃
+  &Box {
+    padding: 8rem 0;
+    border-radius: 2.5rem;
+    background-color: $color_white;
+  }
+
+  &Inner {
+    padding-inline: min(7vw, 10.5rem);
+  }
+
+  &Sub {
+    margin-bottom: 2rem;
+    @include mixin.font(700 '2rem');
+
+    span {
+      color: $gray_200;
+    }
+  }
+  //> 레이아웃
+
+  //< 스킬 리스트
+  &List {
+    display: grid;
+    grid-template-columns: 22vw 1fr;
+    gap: 2rem;
+  }
+
+  &Item {
+    padding: 1.5rem;
+    border-radius: 2.5rem;
+    background-color: $color_bg;
+
+    .textTitle {
+      margin-bottom: 1rem;
+      @include mixin.font($gray_200 700 '2rem');
+    }
+
+    .textRefer {
+      display: block;
+      @include mixin.font($gray_200 '1.2rem' right);
+    }
+
+    .textList {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem 0;
+    }
+  }
+
+  &Detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem 0;
+  }
+  //> 스킬 리스트
+}
