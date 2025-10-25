@@ -1,13 +1,16 @@
-// import { useState } from 'react'
+import Portfolio from './pages/Portfolio';
 
 function App() {
   return (
     <>
-      <p>
-        메인
-      </p>
+      <nav className="hwiSkip">
+        <ul>
+          <li><a href="#body">본문바로가기</a></li>
+        </ul>
+      </nav>
+      <Portfolio />
     </>
   )
 }
 
-export default App
+export default App;
