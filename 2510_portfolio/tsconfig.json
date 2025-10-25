@@ -13,7 +13,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "paths": {
+      "styles/*": ["styles/*"],
+      "data/*": ["data/*"],
+      "layout/*": ["components/layout/*"],
+      "sections/*": ["components/sections/*"],
+    },
   },
   "include": ["src", "scripts"]
 }
