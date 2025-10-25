@@ -34,7 +34,7 @@ function Skills() {
               </div>
               <div className={styles.skillsItem}>
                 <h5 className={styles.textTitle}>핵심역량</h5>
-                <ul className={styles.textList}>
+                <ul className="textList">
                   <li>UI/UX 구현 및 구조 개선 경험 (대형 HR·이커머스 플랫폼 중심)</li>
                   <li>Vue.js 기반 컴포넌트 설계로 재사용성과 유지보수성 향상</li>
                   <li>JavaScript(ES6+) 기반 비동기 처리 및 렌더링 최적화 경험</li>

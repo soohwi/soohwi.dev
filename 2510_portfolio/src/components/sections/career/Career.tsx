@@ -22,7 +22,7 @@ function Career() {
                     {item.team} | {item.role} | {item.position} | {item.period}
                   </dd>
                   <dd>
-                    <ul className={styles.textSummary} role="list">
+                    <ul className="textList" role="list">
                       {item.summary.map((sentence, idx) => (
                         <li key={idx}>
                           {sentence.map((part, i) => (
