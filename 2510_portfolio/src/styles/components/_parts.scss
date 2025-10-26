@@ -14,6 +14,19 @@
   border-radius: 1rem;
   background-color: $gray_100;
 
+  &Mark {
+    position: relative;
+    color: $gray_800;
+    &::before {
+      content: '(';
+      font-size: 1rem;
+    }
+    &::after {
+      content: ')';
+      font-size: 1rem;
+    }
+  }
+
   &List {
     display: flex;
     flex-wrap: wrap;
