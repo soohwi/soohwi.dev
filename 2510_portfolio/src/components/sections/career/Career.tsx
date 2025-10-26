@@ -10,7 +10,11 @@ function Career() {
   return (
     <section id="career" className={styles.career}>
       <div className="hwiInner">
-        <h3 className="hwiTitle">Career</h3>
+        {/* 타이틀 */}
+        <h3 className="hwiTitle">&#60;Career &#47;&#62;</h3>
+        {/*-- 타이틀 */}
+
+        {/* 경력리스트 */}
         <div className={styles.careerBox}>
           <ol className={styles.careerList}>
             {careerData.map((item) => (
@@ -45,6 +49,7 @@ function Career() {
             ))}
           </ol>
         </div>
+        {/*-- 경력리스트 */}
       </div>
     </section>
   )
