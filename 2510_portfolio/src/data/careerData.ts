@@ -3,9 +3,9 @@
  * careerData.ts
 **/
 
-export interface ItemSummaryPart {
+type Summary = {
   text: string;
-  bold: boolean;
+  bold?: boolean;
 }
 
 export interface CareerItem {
@@ -16,7 +16,7 @@ export interface CareerItem {
   role: string;
   position: string;
   period: string;
-  summary: ItemSummaryPart[][];
+  summary: Summary[][];
   projects: string;
   skills: string[];
 }
@@ -33,12 +33,12 @@ export const careerData: CareerItem[] = [
     summary: [
       [
         { text: 'Vue.js 기반 HR 플랫폼의 UI 및 컴포넌트 구조를 설계 및 구현', bold: true },
-        { text: '하여 재사용성과 유지보수성 30% 향상', bold: false }
+        { text: '하여 재사용성과 유지보수성 30% 향상' }
       ],
       [
-        { text: 'Figma 기반 협업 및 ', bold: false },
+        { text: 'Figma 기반 협업 및 ' },
         { text: '개발자 가이드 문서화', bold: true },
-        { text: '로 디자이너·개발자 간 협업 효율 15% 개선', bold: false }
+        { text: '로 디자이너·개발자 간 협업 효율 15% 개선' }
       ]
     ],
     projects: 'GS칼텍스 통합 HR 플랫폼, SK바이오사이언스 HR 서비스, HR 서비스 고도화',
