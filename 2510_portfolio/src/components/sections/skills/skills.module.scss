@@ -10,12 +10,12 @@
 
 //< 레이아웃
 .skills {
-  padding-block: 12rem;
+  padding-block: $section_padding_block;
   background-color: $color_bg;
 
   &Box {
     padding: 8rem 0;
-    border-radius: 2.5rem;
+    border-radius: $borderRadius_base;
     background-color: $color_white;
   }
 
@@ -46,7 +46,7 @@
     position: relative;
     padding: 3rem;
     min-height: 20rem;
-    border-radius: 2.5rem;
+    border-radius: $borderRadius_base;
     background-color: $color_bg;
 
     &:last-child {

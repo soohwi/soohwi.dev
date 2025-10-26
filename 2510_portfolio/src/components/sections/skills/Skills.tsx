@@ -12,7 +12,7 @@ function Skills() {
       <div className="hwiInner">
         <div className={styles.skillsBox}>
           <div className={styles.skillsInner}>
-            <h3 className="hwiTitle">What I Do Best</h3>
+            <h3 className="hwiTitle">&#60;What I Do Best &#47;&#62;</h3>
             <p className={styles.skillsSub}>Skills & Competencies</p>
             <SkillsList />
           </div>

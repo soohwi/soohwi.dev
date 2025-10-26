@@ -24,7 +24,7 @@ export interface CareerItem {
 export const careerData: CareerItem[] = [
   {
     id: 'hcg',
-    company: '(주) 휴먼컨설팅그룹',
+    company: '(주)휴먼컨설팅그룹',
     logo: 'hcg',
     team: 'UX Team',
     role: '프론트엔드 개발',
@@ -46,7 +46,7 @@ export const careerData: CareerItem[] = [
   },
   {
     id: 'mm',
-    company: '(주) 엠몬스타',
+    company: '(주)엠몬스타',
     logo: 'mm',
     team: 'Publisher Team',
     role: '웹 퍼블리셔',

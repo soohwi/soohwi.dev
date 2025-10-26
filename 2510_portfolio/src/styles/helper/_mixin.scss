@@ -273,63 +273,63 @@
 // 	.foo {
 // 		@include mixin.svg(color url 'position/size' repeat clip origin);
 // 	}
-// @mixin svg($values: null) {
+@mixin svg($values: null) {
 
-// 	$isClip: false;
-// 	@each $value in $values {
-// 		@if meta.type-of($value) == color {
-// 			// @debug 'background-color:' $value;
-// 			background-color: $value;
-// 		}
-// 		@else if meta.type-of($value) == string and string.index($value, 'var') {
-// 			// css 변수
-// 			// @debug 'background-color:' $value;
-// 			background-color: $value;
-// 		}
-// 		@else if string.index($value, 'url') or string.index($value, 'none') {
-// 			// @debug 'mask-image:' $value;
-// 			mask-image: $value;
-// 			-webkit-mask-image: $value;
-// 		}
-// 		@else if string.index($value, 'repeat') or list.index(space round, $value) {
-// 			// @debug 'mask-repeat:' $value;
-// 			mask-repeat: $value;
-// 			-webkit-mask-repeat: $value;
-// 		}
-// 		@else if string.index($value, 'box') or list.index(no-clip, $value) {
-// 			@if not $isClip {
-// 				// @debug 'mask-clip:' $value;
-// 				mask-clip: $value;
-// 				-webkit-mask-clip: $value;
-// 				$isClip: true;
-// 			}
-// 			@else {
-// 				// @debug 'mask-origin:' $value;
-// 				mask-origin: $value;
-// 				-webkit-mask-origin: $value;
-// 			}
-// 		}
-// 		@else if string.index(meta.inspect($value), '"') == 1 {
-// 			$numbers: string.split(string.unquote($value), '/');
-// 			@for $i from 1 through list.length($numbers) {
-// 				$number: list.nth($numbers, $i);
-// 				@if ($number != '') {
-// 					@if $i == 1 {
-// 						// @debug 'mask-position:' $number;
-// 						mask-position: $number;
-// 						-webkit-mask-position: $number;
-// 					}
-// 					@else {
-// 						// @debug 'mask-size:' $number;
-// 						mask-size: $number;
-// 						-webkit-mask-size: $number;
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
+	$isClip: false;
+	@each $value in $values {
+		@if meta.type-of($value) == color {
+			// @debug 'background-color:' $value;
+			background-color: $value;
+		}
+		@else if meta.type-of($value) == string and string.index($value, 'var') {
+			// css 변수
+			// @debug 'background-color:' $value;
+			background-color: $value;
+		}
+		@else if string.index($value, 'url') or string.index($value, 'none') {
+			// @debug 'mask-image:' $value;
+			mask-image: $value;
+			-webkit-mask-image: $value;
+		}
+		@else if string.index($value, 'repeat') or list.index(space round, $value) {
+			// @debug 'mask-repeat:' $value;
+			mask-repeat: $value;
+			-webkit-mask-repeat: $value;
+		}
+		@else if string.index($value, 'box') or list.index(no-clip, $value) {
+			@if not $isClip {
+				// @debug 'mask-clip:' $value;
+				mask-clip: $value;
+				-webkit-mask-clip: $value;
+				$isClip: true;
+			}
+			@else {
+				// @debug 'mask-origin:' $value;
+				mask-origin: $value;
+				-webkit-mask-origin: $value;
+			}
+		}
+		@else if string.index(meta.inspect($value), '"') == 1 {
+			$numbers: string.split(string.unquote($value), '/');
+			@for $i from 1 through list.length($numbers) {
+				$number: list.nth($numbers, $i);
+				@if ($number != '') {
+					@if $i == 1 {
+						// @debug 'mask-position:' $number;
+						mask-position: $number;
+						-webkit-mask-position: $number;
+					}
+					@else {
+						// @debug 'mask-size:' $number;
+						mask-size: $number;
+						-webkit-mask-size: $number;
+					}
+				}
+			}
+		}
+	}
 
-// }
+}
 //> svg 이미지
 
 //< 대체텍스트

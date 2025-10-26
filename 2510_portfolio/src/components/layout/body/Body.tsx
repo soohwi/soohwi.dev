@@ -5,7 +5,7 @@
 
 import Home from 'sections/home/Home';
 import Skills from 'sections/skills/Skills';
-import ProjectList from 'sections/projects/ProjectList';
+import Projects from 'sections/projects/Projects';
 import Career from 'sections/career/Career';
 import styles from './body.module.scss';
 
@@ -15,7 +15,7 @@ function Body() {
       <div className={styles.pageContent}>
         <Home />
         <Skills />
-        <ProjectList />
+        <Projects />
         <Career />
       </div>
     </div>
