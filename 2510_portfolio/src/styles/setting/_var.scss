@@ -80,11 +80,20 @@ $font_mono: 'Roboto Mono', 'JetBrains Mono', 'SF Mono', Monaco, Inconsolata, 'So
 }
 //> 텍스트
 
-//< 최소사이즈
+//< 사이즈
+// 최소사이즈
 $minWidth_base: 136rem;// mobile 320px
 // $minWidth_base: 1520px;
 // $minWidth_extend: $minWidth_base + (106 * 2);// pc 좌/우 날개배너 확장
-//> 최소사이즈
+
+// 모달
+$modal_header_height: 7rem;
+$modal_side_margin: 2rem;
+// $modal_width_base: 500px;
+// $modal_width_sm: 412px;
+// $modal_width_lg: 700px;
+// $modal_width_xl: 920px;
+//> 사이즈
 
 //< 레이아웃
 // 단계: min, base, extend
@@ -103,12 +112,6 @@ $minWidth_base: 136rem;// mobile 320px
 // $sidebar_content_base: 56px;
 // $sidebar_content_sm: 44px;
 
-// modal
-// $modal_header_height_base: 51px;
-// $modal_width_base: 500px;
-// $modal_width_sm: 412px;
-// $modal_width_lg: 700px;
-// $modal_width_xl: 920px;
 
 // skeleton
 // $skeleton_color_base: #eee;

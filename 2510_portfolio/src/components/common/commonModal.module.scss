@@ -1,0 +1,79 @@
+@charset 'utf-8';
+
+@use 'styles/helper/mixin';
+@use 'styles/setting/var' as *;
+
+/**
+ * components/common
+ * commonModal.module.scss
+**/
+
+// 모달 wrap
+.commonModalWrap {
+  position: fixed;
+  z-index: $zIndex_modal;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba($color_black, .5);
+  // opacity: 0;
+  // @include mixin.transform(scale(.95));
+  // @include mixin.transition(all 1s);
+
+  // &.open {
+  //   opacity: 1;
+  //   @include mixin.transform(scale(1));
+  // }
+}
+
+// 모달 컨텐츠
+.commonModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include mixin.transform(translate(-50%, -50%));
+
+  &Inner {
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: $modal_header_height 1fr;
+    min-width: 50vw;
+    max-width: 85vw;
+    max-height: 90vh;
+    border-radius: 2.5rem;
+    background-color: $color_white;
+  }
+
+  // 헤더
+  .modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 $modal_side_margin;
+
+    // 타이틀
+    .modalTitle {
+      @include mixin.font($gray_800 700 '2rem');
+    }
+
+    // 닫기버튼
+    .modalBtnClose {
+      width: 2rem;
+      height: 2rem;
+
+      .icon {
+        width: 100%;
+        height: 100%;
+        @include mixin.svg($gray_800 url('/src/assets/icon/icon_close.svg') '/2rem' no-repeat);
+      }
+    }
+  }
+
+  // 바디
+  .modalBody {
+    overflow: auto;
+    margin: 0 $modal_side_margin;
+    padding-bottom: $modal_side_margin;
+  }
+}
