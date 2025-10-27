@@ -15,7 +15,7 @@ function Header() {
           <ul className={styles.gnbList}>
             <li><a href="#home">&#60;Home &#47;&#62;</a></li>
             <li><a href="#skills">&#60;Skills &#47;&#62;</a></li>
-            <li><a href="#projects">&#60;Projects &#47;&#62;</a></li>
+            <li><a href="#project">&#60;Project &#47;&#62;</a></li>
             <li><a href="#career">&#60;Career &#47;&#62;</a></li>
           </ul>
         </nav>

@@ -1,11 +1,10 @@
 /**
  * components/sections
- * projects/ProjectsTab.tsx
+ * project/ProjectTab.tsx
 **/
 
-import styles from './projects.module.scss';
-import { useState } from 'react';
-import { ProjectsData } from 'data/projectsData';
+import styles from './project.module.scss';
+import { ProjectData } from 'data/projectData';
 
 interface tabProps {
   selectedTab: string;
@@ -16,16 +15,16 @@ const tabs = ['All', '개인', '(주)휴먼컨설팅그룹', '(주)엠몬스타'
 
 // 각 탭별 개수 계산
 const tabItemCount = tabs.map((tab) => {
-  if (tab === 'All') return ProjectsData.length;
-  return ProjectsData.filter((item) => item.comp === tab).length;
+  if (tab === 'All') return ProjectData.length;
+  return ProjectData.filter((item) => item.comp === tab).length;
 });
 
 // 2자릿수 포매팅
 const formatCount = (count: number) => String(count).padStart(2, '0');
 
-function ProjectsTab({ selectedTab, setSelectedTab }: tabProps) {
+function ProjectTab({ selectedTab, setSelectedTab }: tabProps) {
   return (
-    <div className={styles.projectsTab}>
+    <div className={styles.projectTab}>
       <ul role="tablist">
         {tabs.map((tab, i) => (
           <li key={tab}>
@@ -52,4 +51,4 @@ function ProjectsTab({ selectedTab, setSelectedTab }: tabProps) {
   )
 }
 
-export default ProjectsTab;
+export default ProjectTab;

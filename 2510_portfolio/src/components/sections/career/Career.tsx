@@ -34,7 +34,7 @@ function Career() {
                           ))}
                         </li>
                       ))}
-                      <li><strong>주요 프로젝트</strong>: {item.projects}</li>
+                      <li><strong>주요 프로젝트</strong>: {item.project}</li>
                     </ul>
                   </dd>
                   <dd>

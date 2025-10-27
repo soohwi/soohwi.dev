@@ -17,7 +17,7 @@ export interface CareerItem {
   position: string;
   period: string;
   summary: Summary[][];
-  projects: string;
+  project: string;
   skills: string[];
 }
 
@@ -41,7 +41,7 @@ export const careerData: CareerItem[] = [
         { text: '로 디자이너·개발자 간 협업 효율 15% 개선' }
       ]
     ],
-    projects: 'GS칼텍스 통합 HR 플랫폼, SK바이오사이언스 HR 서비스, HR 서비스 고도화',
+    project: 'GS칼텍스 통합 HR 플랫폼, SK바이오사이언스 HR 서비스, HR 서비스 고도화',
     skills: ['Vue.js', 'JavaScript(ES6+)', 'SCSS(SASS)', 'HTML5', 'Figma'],
   },
   {
@@ -62,7 +62,7 @@ export const careerData: CareerItem[] = [
         { text: '로 개발 효율성 향상 및 유지보수 체계 개선', bold: false }
       ]
     ],
-    projects: '내셔널지오그래픽몰 리뉴얼, HAGO 쇼핑몰 리뉴얼, 패션플러스 리뉴얼, 자사 솔루션 구축',
+    project: '내셔널지오그래픽몰 리뉴얼, HAGO 쇼핑몰 리뉴얼, 패션플러스 리뉴얼, 자사 솔루션 구축',
     skills: ['JavaScript', 'jQuery', 'SCSS(SASS)', 'HTML5', 'Adobe XD'],
   }
 ];
