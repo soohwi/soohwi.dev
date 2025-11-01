@@ -15,6 +15,9 @@ function ProjectCard({ item, onClick }: ProjectCardProps) {
   return (
     <div className={styles.cardItem} role="listitem">
       <button type="button" aria-label={`${item.title} 자세히 보기`} onClick={onClick}>
+        {item.position?.includes('Project Leader') && (
+          <span className={styles.badgePL} aria-label="Project Leader">PL</span>
+        )}
         <figure>
           <div className={styles.thumb}>
             <img src={item.imgSrc} alt={item.title} />
@@ -22,8 +25,8 @@ function ProjectCard({ item, onClick }: ProjectCardProps) {
           <figcaption>
             <p className={styles.textComp}>{item.comp}</p>
             <p className={styles.textTitle}>{item.title}</p>
-            <p className={styles.textPeriod}>{item.period}</p>
-            <p className={styles.textPosition}>{item.position}</p>
+            {/* <p className={styles.textPeriod}>{item.period}</p> */}
+            {/* <p className={styles.textPosition}>{item.position}</p> */}
             <p className={styles.textSkill}>{item.skill}</p>
           </figcaption>
         </figure>

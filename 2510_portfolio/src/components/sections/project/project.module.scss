@@ -72,6 +72,12 @@
         border-radius: 100%;
         background-color: $gray_100;
 
+        &:disabled {
+          .icon {
+            background-color: $gray_200;
+          }
+        }
+
         .icon {
           margin-right: .2rem;
           @include mixin.svg($gray_800 url('/src/assets/icon/icon_arrow.svg'));
@@ -121,6 +127,18 @@
       height: 100%;
     }
 
+    // pl 표시 뱃지
+    .badgePL {
+      position: absolute;
+      top: 1.3rem;
+      right: 1.3rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      @include mixin.font($color_white 700 '1.5rem/3.7rem' center);
+      border-radius: 100%;
+      background-color: $color_secondary;
+    }
+
     figure {
       display: flex;
       gap: 5rem 0;
@@ -145,7 +163,7 @@
         @include mixin.font($gray_800 '1.4rem' left);
 
         .textComp {
-          @include mixin.font(700 '1.6rem');
+          @include mixin.font($gray_300 700 '1.6rem');
         }
 
         .textTitle {
@@ -154,19 +172,11 @@
           word-break: keep-all;
         }
 
-        .textPeriod {
-          margin-top: 1.5rem;
-          font-weight: 400;
-        }
-
         .textSkill {
           margin-top: .5rem;
-          // padding: .5rem 1rem;
-          @include mixin.font($color_black 700);
+          @include mixin.font($gray_300 700);
           word-break: keep-all;
           text-decoration: underline;
-          // border-radius: 1rem;
-          // background-color: $color_bg;
         }
       }
     }
@@ -196,3 +206,146 @@
   }
 }
 //> 카드리스트
+
+//< 프로젝트 모달 컨텐츠
+.modalDetail {
+  // 프로젝트 type
+  // $projects: ('hwitter', pink), ('movieApp', pink), ('hcgHr', pink), ('skBio', #E9002D), ('gs', #009999), ('mmon', #25272A),
+  // ('nStation', #000), ('hago', #0B3148), ('fp', #bc0919);
+  $projects:
+  ('portfolio', #eae8f1), ('hwitter', #e8e8e8), ('movieApp', #e8e8e8),
+  ('hcgHr', #e3efef), ('skBio', #f7e8ec), ('gs', #e3efef),
+  ('mmon', #e4ecf1), ('nStation', #e8e8e8), ('hago', #e4ecf1), ('fp', #f7e8ec);
+
+  @each $type, $color in $projects {
+    &.type_#{$type} {
+      .modalInfo {
+        background-color: $color;
+      }
+    }
+  }
+
+
+  // 상단 프로젝트 정보
+  .modalInfo {
+    padding: $modal_inner_padding;
+    @include mixin.font($gray_800 700 '1.8rem');
+    border-radius: $borderRadius_base;
+    background-color: $color_white;
+
+    .infoTitle {
+      margin-bottom: 4rem;
+      font-size: 3.5rem;
+    }
+
+    .infoPosition {
+      text-decoration: underline;
+    }
+
+    dl {
+      display: flex;
+      gap: 0 2rem;
+      margin-top: .5rem;
+
+      &:first-of-type {
+        margin-top: 1.5rem;
+      }
+
+      dt {
+        min-width: 7rem;
+      }
+
+      dd {
+        font-weight: 400;
+      }
+    }
+
+    // 바로가기 버튼
+    .btnLink {
+      display: inline-flex;
+      align-items: center;
+      gap: 0 .5rem;
+      margin-top: 1rem;
+      height: 3.5rem;
+      padding: 0 1rem;
+      @include mixin.font(400 '1.5rem');
+      border-radius: 1rem;
+      background-color: $color_white;
+
+      &Icon {
+        margin-top: -.1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        @include mixin.svg($gray_800 url('/src/assets/icon/icon_link.svg') '/1.5rem' no-repeat);
+      }
+
+      &:hover {
+        background-color: pink;
+      }
+    }
+  }
+
+  // 보안문구
+  .textSecurity {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin: 4rem 1rem -3rem;
+    @include mixin.font($warning 700 '1.5rem');
+
+    strong {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .icon {
+      width: 2rem;
+      height: 2rem;
+      @include mixin.svg($warning url('/src/assets/icon/icon_warning.svg') '/2rem' no-repeat);
+    }
+  }
+
+  // 프로젝트 컨텐츠
+  .modalContent {
+    margin-top: 4rem;
+    padding: $modal_inner_padding;
+    border-radius: $borderRadius_base;
+    background-color: $color_white;
+  }
+
+  // 이슈/개선/회고
+  .modalSection {
+    @include mixin.font($gray_800 '1.8rem');
+
+    &:not(:first-of-type) {
+      margin-top: 4rem;
+    }
+
+    .modalSubTitle {
+      margin-bottom: 1rem;
+      @include mixin.font(700 '2rem');
+    }
+
+    .modalList {
+      padding: 0 1rem;
+
+      li {
+        position: relative;
+        margin-top: .5rem;
+        padding-left: 1.5rem;
+
+        &::before {
+          position: absolute;
+          top: 1rem;
+          left: 0;
+          width: .4rem;
+          height: .4rem;
+          border-radius: 100%;
+          background-color: $gray_800;
+          content: '';
+        }
+      }
+    }
+  }
+}
+//> 프로젝트 모달 컨텐츠

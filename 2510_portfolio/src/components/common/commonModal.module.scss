@@ -17,6 +17,7 @@
   bottom: 0;
   left: 0;
   background-color: rgba($color_black, .5);
+  backdrop-filter: blur(3px);
   opacity: 0;
   @include mixin.transition(opacity $transition_slow);
 
@@ -42,11 +43,13 @@
     overflow: hidden;
     display: grid;
     grid-template-rows: $modal_header_height 1fr;
-    min-width: 50vw;
+    // min-width: 50vw;
+    width: 80vw;
     max-width: 85vw;
     max-height: 90vh;
     border-radius: 2.5rem;
-    background-color: $color_white;
+    background-color: $color_bg;
+    // background-color: $color_white;
   }
 
   // 헤더

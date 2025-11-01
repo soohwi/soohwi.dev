@@ -12,15 +12,18 @@ $color_main: #d8c4f6;
 $color_main_light: #e3ddf9;
 // $color_main_dark: ;
 
+$color_secondary: #a7c699;
+
 $gray_50: #f5f5f7;
 $gray_100: #e2e2e3;
 $gray_200: #c4c2ca;
+$gray_300: #999;
 $gray_800: #4a4854;
 
 // // === 의미 색상 ===
 // $success: #00ba7c;
 // $danger: #f4212e;
-// $warning: #ffad1f;
+$warning: #ffad1f;
 // $info: $twitter-blue;
 // $color_negative_base: #ee4f10;
 // $color_positive_base: $color_tertiary_base;//$color_main;
@@ -88,7 +91,8 @@ $minWidth_base: 136rem;// mobile 320px
 
 // 모달
 $modal_header_height: 7rem;
-$modal_side_margin: 2rem;
+$modal_side_margin: 4rem;
+$modal_inner_padding: 3rem 2rem;
 // $modal_width_base: 500px;
 // $modal_width_sm: 412px;
 // $modal_width_lg: 700px;

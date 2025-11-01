@@ -6,15 +6,30 @@
 export interface ProjectDetail {
   id: string;
   title: string;
+  security?: boolean;
   problem?: string[];
   solution: string[];
   reflection: string[];
+  link?: string;
 }
 
 export const ProjectDetailData: ProjectDetail[] = [
   {
+    id: 'portfolio',
+    title: '포트폴리오',
+    problem: [
+
+    ],
+    solution: [
+
+    ],
+    reflection: [
+
+    ],
+  },
+  {
     id: 'hwitter',
-    title: '',
+    title: 'Hwitter (SNS 클론)',
     problem: [
 
     ],
@@ -27,7 +42,7 @@ export const ProjectDetailData: ProjectDetail[] = [
   },
   {
     id: 'movieApp',
-    title: '',
+    title: '영화 앱 클론',
     problem: [
 
     ],
@@ -41,6 +56,7 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: 'hcgHr',
     title: '휴먼컨설팅그룹 HR 서비스 고도화',
+    security: true,
     problem: [
       'HR 플랫폼 고도화 과정에서 UI 구조가 페이지별로 상이하고, 공통 컴포넌트 정의가 부족한 상황',
       '스타일 변수와 디자인 시스템이 통일되지 않아 디자인 일관성 유지가 어려운 환경',
@@ -59,6 +75,7 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: 'skBio',
     title: 'SK바이오사이언스 HR 서비스',
+    security: true,
     problem: [
       '다양한 차트 형태와 데이터 구조가 복잡해, 시각화 정확도와 데이터 반영 일관성을 유지하기 어려운 환경',
       '프로젝트 초기에 스타일 시스템이 통일되지 않아, SCSS 구조 재정비의 필요성이 존재',
@@ -77,6 +94,7 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: 'gs',
     title: 'GS칼텍스 통합 HR 플랫폼 개발',
+    security: true,
     problem: [
       'HR 통합 서비스 특성상 PC·모바일·채용사이트 등 다중 플랫폼을 동시에 지원해야 하는 복잡한 구조',
       '다양한 차트 및 인터랙션 기능 요청으로 인해 기능 간 충돌이나 스크립트 최적화 과제가 존재',
@@ -96,6 +114,7 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: 'mmon',
     title: '엠몬 솔루션 신규 구축 (회사 자체 솔루션)',
+    security: true,
     problem: [
       '다양한 쇼핑몰 템플릿을 지원해야 하는 플랫폼 특성상 UI 코드 재사용성과 스타일 일관성 확보가 주요 과제',
       '회사 솔루션 구축 과정에서 공통 컴포넌트 및 스타일 시스템 정립의 필요성이 대두',
@@ -114,6 +133,7 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: 'nStation',
     title: '내셔널지오그래픽 온라인몰 리뉴얼(Nstation)',
+    security: true,
     problem: [
       '기존 UI 구조가 페이지별로 상이해, 유사한 컴포넌트가 중복 구현되어 유지보수 효율이 낮았던 상황',
       '공통 모듈화와 코드 구조 정리의 필요성이 높았던 프로젝트 환경',
@@ -128,10 +148,12 @@ export const ProjectDetailData: ProjectDetail[] = [
       '공통화 설계와 인터랙션 구현을 병행하며 UI 구조 설계 역량과 JavaScript 응용력을 향상',
       '코드 일관성을 유지하며 퍼블리셔에서 프론트엔드로 성장하는 전환점을 마련',
     ],
+    link: 'https://www.nstationmall.com/'
   },
   {
     id: 'hago',
     title: 'HAGO 쇼핑몰 리뉴얼',
+    security: true,
     problem: [
       '리뉴얼 과정에서 디자인적으로 새로운 슬라이더 스타일과 애니메이션 요소가 추가되어, 기존 슬라이더 구조에 신규 옵션을 유연하게 반영하는 방법을 고민해야 했던 상황',
       '기존 UI 컴포넌트를 수정하지 않고 확장 가능한 구조로 구현하는 방향을 모색',
@@ -146,10 +168,12 @@ export const ProjectDetailData: ProjectDetail[] = [
       '신규 디자인 요구를 코드 구조로 자연스럽게 흡수하는 방법을 체득',
       '기능 개선 과정에서 컴포넌트 단위 사고와 모듈화의 중요성을 실감',
     ],
+    link: 'https://www.hago.kr/'
   },
   {
     id: 'fp',
     title: '패션플러스 2021 리뉴얼',
+    security: true,
     solution: [
       'SCSS를 활용한 모듈식 스타일 구조로 전환하고, 네이밍 컨벤션(BEM 방식)을 적용해 협업 효율 향상',
       '접근성 표준을 반영하여 UI 품질 개선',
@@ -158,5 +182,6 @@ export const ProjectDetailData: ProjectDetail[] = [
       '협업 기반의 코드 컨벤션 확립 경험을 통해 유지보수성과 협업 효율성의 중요성을 학습',
       '대형 커머스 UI 리뉴얼을 통해 구조화된 퍼블리싱의 가치와 표준화의 필요성을 체득',
     ],
+    link: 'https://www.fashionplus.co.kr/'
   },
 ]

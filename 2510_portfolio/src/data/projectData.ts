@@ -16,11 +16,19 @@ export interface ProjectItem {
 
 export const ProjectData: ProjectItem[] = [
   {
+    id: 'portfolio',
+    imgSrc: '/src/assets/images/project/work_thumb-',
+    comp: '개인',
+    title: '포트폴리오',
+    position: '1인 (기여도 100%)',
+    skill: 'React.js, SCSS, HTML5'
+  },
+  {
     id: 'hwitter',
     imgSrc: '/src/assets/images/project/work_thumb-',
     comp: '개인',
-    title: 'Hwitter-reloaded',
-    position: '기여도 100%',
+    title: 'Hwitter (SNS 클론)',
+    position: '1인 (기여도 100%)',
     skill: 'React.js, SCSS, HTML5'
   },
   {
@@ -28,12 +36,12 @@ export const ProjectData: ProjectItem[] = [
     imgSrc: '/src/assets/images/project/work_thumb-',
     comp: '개인',
     title: '영화 앱 클론',
-    position: '기여도 100%',
+    position: '1인 (기여도 100%)',
     skill: 'React.js, styled-components, SCSS, HTML5'
   },
   {
     id: 'hcgHr',
-    imgSrc: '/src/assets/images/project/work_thumb-',
+    imgSrc: '/src/assets/images/project/work_thumb-hcg.png',
     comp: '(주)휴먼컨설팅그룹',
     title: '휴먼컨설팅그룹 HR 서비스 고도화',
     period: '2024.10 - 진행 중',
