@@ -19,6 +19,7 @@
     "paths": {
       "styles/*": ["styles/*"],
       "data/*": ["data/*"],
+      "hooks/*": ["hooks/*"],
       "common/*": ["components/common/*"],
       "layout/*": ["components/layout/*"],
       "sections/*": ["components/sections/*"],
