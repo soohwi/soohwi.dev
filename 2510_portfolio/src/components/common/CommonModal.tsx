@@ -4,6 +4,7 @@
 **/
 
 import styles from './commonModal.module.scss';
+import clsx from 'clsx';
 import { ReactNode, useEffect, useState } from 'react';
 
 interface CommonModalProps {
@@ -26,14 +27,13 @@ function CommonModal({ isOpen, onClose, modalTitle, children }: CommonModalProps
     };
 
     if (isOpen) {
-      setIsMounted(true);// DOM 생성
+      setIsMounted(true);
       setTimeout(() => setIsVisible(true), 10);// 클래스 나중에 추가하여 transition 주기
 
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     } else {
-      setIsVisible(false);// 클래스 삭제
-      // setIsMounted(false);// 클래스 삭제
+      setIsVisible(false);
       timeout = setTimeout(() => setIsMounted(false), 300);// 모달 안 데이터값이 먼저 사라지는걸 막기위해
 
       document.body.style.overflow = '';
@@ -47,7 +47,10 @@ function CommonModal({ isOpen, onClose, modalTitle, children }: CommonModalProps
 
   return (
     <div
-      className={`${styles.commonModalWrap} ${isVisible ? styles.open : ''}`}
+      className={clsx(
+        styles.commonModalWrap,
+        isVisible ? styles.open : ''
+      )}
       onClick={onClose}
       role="dialog"
       aria-modal="true"

@@ -35,7 +35,10 @@ function Header() {
   }, []);
 
   return (
-    <header className={`${styles.header} ${isVisible ? styles.show : ''}`}>
+    <header className={clsx(
+      styles.header,
+      isVisible ? styles.show : ''
+    )}>
       <div className={clsx(styles.headerInner, 'hwiInner')}>
         <h1 className={styles.logo}>SOOHWI.DEV</h1>
         <nav className={styles.gnb}>
