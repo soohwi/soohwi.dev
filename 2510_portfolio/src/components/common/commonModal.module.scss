@@ -17,14 +17,16 @@
   bottom: 0;
   left: 0;
   background-color: rgba($color_black, .5);
-  // opacity: 0;
-  // @include mixin.transform(scale(.95));
-  // @include mixin.transition(all 1s);
+  opacity: 0;
+  @include mixin.transition(opacity $transition_slow);
 
-  // &.open {
-  //   opacity: 1;
-  //   @include mixin.transform(scale(1));
-  // }
+  &.open {
+    opacity: 1;
+
+    .commonModal {
+      opacity: 1;
+    }
+  }
 }
 
 // 모달 컨텐츠
@@ -32,7 +34,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  opacity: 0;
   @include mixin.transform(translate(-50%, -50%));
+  @include mixin.transition(opacity $transition_slow);
 
   &Inner {
     overflow: hidden;
