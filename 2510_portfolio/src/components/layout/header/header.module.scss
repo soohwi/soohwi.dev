@@ -15,11 +15,11 @@
   right: 0;
   left: 0;
   padding: 1rem 0;
-  // @include mixin.transform(translateY(-100%));
+  @include mixin.transform(translateY(-100%));
   @include mixin.transition(transform $transition_slow);
 
-  &.on {
-    // @include mixin.transform(translateY(0));
+  &.show {
+    @include mixin.transform(translateY(0));
   }
 
   &Inner {

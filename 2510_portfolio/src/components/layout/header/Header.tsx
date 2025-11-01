@@ -5,10 +5,37 @@
 
 import clsx from 'clsx';
 import styles from './header.module.scss';
+import { useEffect, useState } from 'react';
 
 function Header() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const $home = document.querySelector('#home');
+
+      if (!$home) return;
+
+      const homeHeight = $home.offsetHeight - 120;
+
+      // home 영역 지나면 header show
+      if (scrollY > homeHeight) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isVisible ? styles.show : ''}`}>
       <div className={clsx(styles.headerInner, 'hwiInner')}>
         <h1 className={styles.logo}>SOOHWI.DEV</h1>
         <nav className={styles.gnb}>
