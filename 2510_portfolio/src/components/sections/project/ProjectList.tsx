@@ -4,29 +4,23 @@
 **/
 
 import styles from './project.module.scss';
-import { useRef, useState } from 'react';
-import { ProjectData } from 'data/projectData';
-import CommonModal from 'common/CommonModal';
+import { useEffect, useRef, useState } from 'react';
+import { ProjectData, ProjectItem } from 'data/projectData';
+import { ProjectDetailData } from 'data/projectDetailData';
 import ProjectCard from './ProjectCard';
-import ProjectModalContent from './ProjectModalContent';
+import ProjectCardModal from './ProjectCardModal';
+import CommonModal from 'common/CommonModal';
+import { useModal } from 'hooks/useModal';
 
 interface projectListProps {
   selectedTab: string;
 }
 
-interface ProjectCardItem {
-  id: string;
-  imgSrc: string;
-  comp: string;
-  title: string;
-  period?: string;
-  position?: string;
-  skill: string;
-}
-
 function ProjectList({ selectedTab }: projectListProps) {
   const cardListRef = useRef<HTMLDivElement>(null);// DOM 요소에 접근하기 위한 ref 선언 (이 ref를 통해 scrollBy 등 스크롤 제어 가능)
-  const [selectedProject, setSelectedProject] = useState<null | ProjectCardItem>(null);
+  const { isOpen, data: selectedProject, open, close, setData } = useModal<ProjectItem>();
+  // const [selectedProject, setSelectedProject] = useState<null | ProjectItem>(null);
+  const detailMap = new Map(ProjectDetailData.map(item => [item.id, item]));
 
   // 슬라이더 이전/다음 컨트롤러
   const handleControl = (dir: 'prev' | 'next') => {
@@ -44,6 +38,14 @@ function ProjectList({ selectedTab }: projectListProps) {
       ? ProjectData
       : ProjectData.filter((item) => item.comp === selectedTab);
 
+  // 모달 닫기 (애니메이션 후 데이터 삭제)
+  useEffect(() => {
+    if (!isOpen) {
+      const timer = setTimeout(() => setData(null), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, setData]);
+
   return (
     <div className={styles.projectSlider}>
       {/* 카드리스트 */}
@@ -52,7 +54,7 @@ function ProjectList({ selectedTab }: projectListProps) {
           <ProjectCard
             key={project.id}
             item={project}
-            onClick={() => setSelectedProject(project)}// 모달 열기
+            onClick={() => open(project)}
           />
         ))}
       </div>
@@ -71,11 +73,15 @@ function ProjectList({ selectedTab }: projectListProps) {
 
       {/* 모달 */}
       <CommonModal
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
+        isOpen={isOpen}
+        onClose={close}
         modalTitle={selectedProject?.title}
-      >
-        {selectedProject && <ProjectModalContent item={selectedProject} />}
+        >
+        {selectedProject &&
+          <ProjectCardModal
+            item={selectedProject}
+            detail={detailMap.get(selectedProject.id)}
+          />}
       </CommonModal>
       {/*-- 모달 */}
     </div>

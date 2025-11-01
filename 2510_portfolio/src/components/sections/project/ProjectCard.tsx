@@ -4,9 +4,10 @@
 **/
 
 import styles from './project.module.scss';
+import { ProjectItem } from 'data/projectData';
 
 interface ProjectCardProps {
-  item: ProjectCardItem;
+  item: ProjectItem;
   onClick: () => void;
 }
 
