@@ -1,7 +1,7 @@
 @charset 'utf-8';
 
-@use 'styles/helper/mixin';
-@use 'styles/setting/var' as *;
+// @use 'styles/helper/mixin';
+// @use 'styles/setting/var' as *;
 
 /**
  * components/sections
@@ -12,8 +12,9 @@
   display: flex;
   align-items: center;
   height: 100vh;
-  @include mixin.font('1.5rem' center);
-  @include mixin.background(linear-gradient(#c4d8f6, #d8c4f6, #f5f5f7));
+  font-size: 1.5rem;
+  text-align: center;
+  background-image: linear-gradient(#c4d8f6, #d8c4f6, #f5f5f7);
   // background-image: linear-gradient(to bottom, $color_main, #cdccfb, #c5d4fe, #c0dafd, #bfe0fb, #c6e3fa, #cde6f9, #d4e9f8, #dfebf9, #e8eef8, #eff1f8, $color_bg);
   // background-image: linear-gradient(to bottom, #c4d8f6, #c5d5f8, #c8d2f9, #cbcef9, #d0caf8, #d4ccf8, #d8cff8, #dcd1f8, #e1daf9, #e6e4f9, #edecf8, #f5f5f7);
   // light: #F5F5F7, #D8C4F6
@@ -22,10 +23,49 @@
   // 타이틀
   &Title {
     //reload 효과 넣기
-    @include mixin.font(700 '13rem' );
+    font-size: 13rem;
+    font-weight: 700;
   }
 
   &Inner {
+    z-index: 1;
+  }
 
+  &Visual {
+    .moonBox {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none; // 달은 움직임만 보여주고 클릭 방지
+      opacity: .6;
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .starsBox {
+      overflow: hidden;
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+
+      .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: twinkle 2s infinite ease-in-out;
+      }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
   }
 }
