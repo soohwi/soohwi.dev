@@ -80,7 +80,7 @@
 
         .icon {
           margin-right: .2rem;
-          @include mixin.svg($gray_800 url('/src/assets/icon/icon_arrow.svg'));
+          @include mixin.svg($gray_800 url('/assets/icon/icon_arrow.svg'));
         }
       }
 
@@ -195,7 +195,7 @@
       background-color: $color_black;
 
       .icon {
-        @include mixin.svg($color_white url('/src/assets/icon/icon_plus.svg'));
+        @include mixin.svg($color_white url('/assets/icon/icon_plus.svg'));
       }
     }
 
@@ -229,13 +229,16 @@
   // 상단 프로젝트 정보
   .modalInfo {
     padding: $modal_inner_padding;
-    @include mixin.font($gray_800 700 '1.8rem');
+    @include mixin.font($gray_800 '1.6rem');
     border-radius: $borderRadius_base;
     background-color: $color_white;
 
-    .infoTitle {
+    &Title {
       margin-bottom: 4rem;
-      font-size: 3.5rem;
+
+      .infoTitle {
+        @include mixin.font(700 '3.5rem');
+      }
     }
 
     .infoPosition {
@@ -253,36 +256,46 @@
 
       dt {
         min-width: 7rem;
-      }
-
-      dd {
-        font-weight: 400;
+        font-weight: 700;
       }
     }
 
-    // 바로가기 버튼
-    .btnLink {
-      display: inline-flex;
-      align-items: center;
-      gap: 0 .5rem;
+    .infoBtnGroup {
+      display: flex;
+      gap: 0 .4rem;
       margin-top: 1rem;
-      height: 3.5rem;
-      padding: 0 1rem;
-      @include mixin.font(400 '1.5rem');
-      border-radius: 1rem;
-      background-color: $color_white;
 
-      &Icon {
-        margin-top: -.1rem;
-        width: 1.5rem;
-        height: 1.5rem;
-        @include mixin.svg($gray_800 url('/src/assets/icon/icon_link.svg') '/1.5rem' no-repeat);
-      }
+      // 바로가기 버튼
+      .btnLink {
+        display: inline-flex;
+        align-items: center;
+        gap: 0 .5rem;
+        height: 3.5rem;
+        padding: 0 1rem;
+        @include mixin.font(400 '1.5rem');
+        border-radius: 1rem;
+        background-color: $color_white;
 
-      &:hover {
-        background-color: pink;
+        &Icon {
+          margin-top: -.1rem;
+          width: 1.5rem;
+          height: 1.5rem;
+          @include mixin.svg($gray_800 url('/assets/icon/icon_link.svg') '/1.5rem' no-repeat);
+        }
+
+        &.typeGit {
+          .btnLinkIcon {
+            margin: -.1rem 0 .1rem;
+            @include mixin.svg($gray_800 url('/assets/icon/icon_github.png') '/1.5rem' no-repeat);
+          }
+        }
+
+        &:hover {
+          background-color: pink;
+        }
       }
     }
+
   }
 
   // 보안문구
@@ -301,8 +314,13 @@
     .icon {
       width: 2rem;
       height: 2rem;
-      @include mixin.svg($warning url('/src/assets/icon/icon_warning.svg') '/2rem' no-repeat);
+      @include mixin.svg($warning url('/assets/icon/icon_warning.svg') '/2rem' no-repeat);
     }
+  }
+
+  // 썸네일
+  .thumbnail {
+    margin-top: 2rem;
   }
 
   // 프로젝트 컨텐츠
@@ -326,7 +344,7 @@
       @include mixin.font(700 '2rem');
     }
 
-    .modalList {
+    ul.modalList {
       padding: 0 1rem;
 
       li {
@@ -343,6 +361,38 @@
           border-radius: 100%;
           background-color: $gray_800;
           content: '';
+        }
+      }
+    }
+
+    ol.modalList {
+      counter-reset: issue;
+
+      li {
+        padding-left: 1rem;
+        counter-increment: issue;
+
+        .textIssueTitle {
+          font-weight: 700;
+
+          &::before {
+            margin: .1rem .8rem 0 0;
+            min-width: 2.1rem;
+            height: 2.1rem;
+            @include mixin.font($color_white '1.6rem/2.4rem' center);
+            border-radius: 100%;
+            background-color: $color_main;
+            content: counter(issue);
+          }
+        }
+
+        .textIssueDesc {
+          padding-left: 2.9rem;
+        }
+
+        .textIssueImg {
+          margin-top: 1rem;
+          padding-left: 2.9rem;
         }
       }
     }
