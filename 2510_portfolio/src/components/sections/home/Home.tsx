@@ -3,7 +3,7 @@
  * home/Home.tsx
 **/
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import Moon from 'components/threejs/Moon';
@@ -32,11 +32,22 @@ function Home() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // 페이지 진입 후 100ms 후 애니메이션 트리거
+    const timeout = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <section id="home" className={styles.home}>
       <div className={clsx('hwiInner', styles.homeInner)}>
-        <h3 className={styles.homeTitle}>
-          <a href="">Hello, I'm Hwi.</a>
+        <h3 className={clsx(styles.homeTitle, isVisible && styles.visible)}>
+          <span>Hello,</span><span>I'm Hwi.</span>
         </h3>
         <div className={styles.homeContent}>
           <p>5년 이상의 퍼블리싱 경험을 바탕으로, UI 완성도와 협업에 강점을 가진 JavaScript 기반 프론트엔드 개발자 박수휘입니다.</p>
