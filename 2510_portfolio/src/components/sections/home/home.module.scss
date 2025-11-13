@@ -13,23 +13,64 @@
   align-items: center;
   height: 100vh;
   @include mixin.font('1.5rem' center);
-  background-image: linear-gradient(#c4d8f6, #d8c4f6, #f5f5f7);
+  @include mixin.background(linear-gradient(#c4d8f6, #d8c4f6, #f5f5f7));
   // background-image: linear-gradient(to bottom, $color_main, #cdccfb, #c5d4fe, #c0dafd, #bfe0fb, #c6e3fa, #cde6f9, #d4e9f8, #dfebf9, #e8eef8, #eff1f8, $color_bg);
   // background-image: linear-gradient(to bottom, #c4d8f6, #c5d5f8, #c8d2f9, #cbcef9, #d0caf8, #d4ccf8, #d8cff8, #dcd1f8, #e1daf9, #e6e4f9, #edecf8, #f5f5f7);
   // light: #F5F5F7, #D8C4F6
   // dark: #282D36, #0A153D
-
-  // 타이틀
-  &Title {
-    opacity: 0;
-    @include mixin.font(700 '13rem');
-  }
 
   &Inner {
     z-index: 1;
     pointer-events: none;
   }
 
+  // 타이틀
+  &Title {
+    @include mixin.font($color_white 700 '15rem');
+
+    > span {
+      display: block;
+      opacity: 0;
+      @include mixin.transition(all $transition_slower);
+
+      &:first-child {
+        @include mixin.transform(translateX(-50%));
+      }
+
+      &:last-child {
+        @include mixin.transform(translateX(50%));
+      }
+    }
+
+    &.visible {
+      > span {
+        opacity: 1;
+        &:first-child {
+          @include mixin.transform(translateX(-20vw));
+        }
+
+        &:last-child {
+          @include mixin.transform(translateX(20vw));
+        }
+      }
+    }
+  }
+
+  // 컨텐츠 내용
+  &Content {
+    @include mixin.font($color_white 500 '1.8rem/1.9');
+    opacity: 0;
+    @include mixin.transform(translateY(10rem));
+    @include mixin.transition(all $transition_slower);
+
+   &.visible {
+      color: $color_secondary_dark;
+      opacity: 1;
+      @include mixin.transform(translateY(0));
+    }
+  }
+
+  // 홈 비주얼
   &Visual {
     .moonBox {
       position: absolute;
@@ -38,11 +79,43 @@
       height: 100vh;
       pointer-events: none; // 달은 움직임만 보여주고 클릭 방지
       opacity: .6;
+
+      .moonInfo {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 53%;
+        margin-top: -33vh;
+        font-size: 1.4rem;
+        animation: floating 3s ease-in-out infinite;
+
+        .icon {
+          position: absolute;
+          bottom: -2rem;
+          left: 5rem;
+          width: 1.5rem;
+          height: 1.5rem;
+          @include mixin.svg($gray_800 url('/assets/icon/icon_arrow_down.svg') '/1.5rem' no-repeat);
+          @include mixin.transform(rotate(-10deg));
+        }
+
+        @include mixin.media(S) {
+          font-size: 1.2rem;
+        }
+      }
+
+      @keyframes floating {
+        0%   { transform: translateY(0); }
+        50%  { transform: translateY(-1rem); }
+        100% { transform: translateY(0); }
+      }
+
       canvas {
         width: 100%;
         height: 100%;
       }
     }
+
     .starsBox {
       overflow: hidden;
       position: absolute;
@@ -59,6 +132,7 @@
         border-radius: 50%;
         opacity: 0.8;
         animation: twinkle 2s infinite ease-in-out;
+        filter: blur(1px);
       }
     }
 

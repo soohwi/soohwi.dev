@@ -10,7 +10,6 @@ import { useTexture } from "@react-three/drei";
 
 const Moon = () => {
   const moonRef = useRef<Mesh>(null);
-  // const gradient = useTexture("/assets/images/home/ㅡㅐ.jpg");// 달 이미지 씌우기
   const moonTexture = useTexture("/assets/images/home/moon.jpg");// 달 이미지 씌우기
 
 
