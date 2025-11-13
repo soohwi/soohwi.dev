@@ -11,10 +11,22 @@ import styles from './home.module.scss';
 import clsx from 'clsx';
 
 function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrolledPastHeader, setScrolledPastHeader] = useState(false);
+
+  // 페이지 진입 후 100ms 후 애니메이션 트리거
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+
   // 별 배경 마우스위치에 따른 움직임 이벤트
   useEffect(() => {
     const stars = document.querySelectorAll('[data-star]');
-
     const handleMouseMove = (e: MouseEvent) => {
       const {innerWidth, innerHeight} = window;
 
@@ -29,33 +41,42 @@ function Home() {
     };
 
     window.addEventListener("mousemove", handleMouseMove);
+
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const [isVisible, setIsVisible] = useState(false);
-
+  // 스크롤 감지
   useEffect(() => {
-    // 페이지 진입 후 100ms 후 애니메이션 트리거
-    const timeout = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // 스크롤이 100px 이상이면 header 사라지고 content 나타남
+      setScrolledPastHeader(scrollY > 100);
+    };
 
-    return () => clearTimeout(timeout);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <section id="home" className={styles.home}>
-      {/* <div className={clsx('hwiInner', styles.homeInner)}>
-        <h3 className={clsx(styles.homeTitle, isVisible && styles.visible)}>
+      <div className={styles.homeInner}>
+        <h3 className={clsx(
+          styles.homeTitle,
+          isVisible && !scrolledPastHeader && styles.visible,
+        )}>
           <span>Hello,</span><span>I'm Hwi.</span>
         </h3>
-        <div className={clsx(styles.homeContent, isVisible && styles.visible)}>
+        <div className={clsx(
+          styles.homeContent,
+          // isVisible && styles.visible,
+          scrolledPastHeader && styles.visible
+        )}>
           <p>5년 이상의 퍼블리싱 경험을 바탕으로, UI 완성도와 협업에 강점을 가진 JavaScript 기반 프론트엔드 개발자 박수휘입니다.</p>
           <p>웹 퍼블리셔로 출발해 Vue.js 기반의 컴포넌트 개발 경험을 쌓으며 프론트엔드로 전향했습니다.</p>
           <p>현재는 React.js와 TypeScript로 기술 영역을 확장하며 컴포넌트 구조와 상태 관리 패턴을 익히고 있습니다.</p>
           <p>사용자 중심의 UI를 구조적으로 설계하고 개선하는 데 강점이 있습니다.</p>
         </div>
-      </div> */}
+      </div>
       <div className={styles.homeVisual}>
         <div className={styles.moonBox}>
           <p className={styles.moonInfo}><i className={styles.icon}></i>드래그로 달을 움직여 보세요 !</p>
