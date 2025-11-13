@@ -14,7 +14,7 @@ function Project() {
   return (
     <section id="project" className={styles.project}>
       <div className="hwiInner">
-        <h3 className="hwiTitle">&#60;Project &#47;&#62;</h3>
+        <h3 className="hwiTitle">Project</h3>
         <ProjectTab selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       </div>
 

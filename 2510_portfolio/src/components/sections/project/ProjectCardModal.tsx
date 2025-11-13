@@ -28,14 +28,19 @@ function ProjectCardModal({ item, detail }: ProjectCardModalProps) {
           )}
         </div>
         <p className={styles.infoPosition}>{item.position}</p>
+        <ul className={styles.badgeSkill}>
+          {item.skill.map(skill => (
+            <li key={skill}>{skill}</li>
+          ))}
+        </ul>
         <dl>
           <dt>작업 기간</dt>
           <dd>{item.period}</dd>
         </dl>
-        <dl>
+        {/* <dl>
           <dt>사용 언어</dt>
           <dd>{item.skill}</dd>
-        </dl>
+        </dl> */}
         {detail?.purpose && (
           <dl>
             <dt>개발 목적</dt>
@@ -72,7 +77,7 @@ function ProjectCardModal({ item, detail }: ProjectCardModalProps) {
         detail?.security && (
           <p className={styles.textSecurity}>
             <i className={styles.icon}></i>
-            본 프로젝트는 보안상 코드와 화면을 상세히 공개할 수 없어, <strong>프로젝트 구조 흐름과 회고 중심으로 구성했습니다.</strong>
+            <span>본 프로젝트는 보안상 코드와 화면을 상세히 공개할 수 없어, <strong>프로젝트 구조 흐름과 회고 중심으로 구성했습니다.</strong></span>
           </p>
         )
       }

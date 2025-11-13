@@ -10,7 +10,7 @@ export interface ProjectItem {
   title: string;
   period?: string;
   position?: string;
-  skill: string;
+  skill: string[];
 }
 
 export const ProjectData: ProjectItem[] = [
@@ -21,7 +21,7 @@ export const ProjectData: ProjectItem[] = [
     title: '포트폴리오',
     period: '약 3주',
     position: '1인 (기여도 100%)',
-    skill: 'React.js, TypeScript, SCSS, HTML5'
+    skill: ['React.js', 'TypeScript', 'SCSS', 'HTML5']
   },
   {
     id: 'hwitter',
@@ -30,7 +30,7 @@ export const ProjectData: ProjectItem[] = [
     title: 'Hwitter (SNS 클론)',
     period: '약 2주',
     position: '1인 (기여도 100%)',
-    skill: 'React.js, TypeScript, SCSS, Firebase'
+    skill: ['React(Vite 기반)', 'TypeScript', 'SCSS', 'Firebase']
   },
   {
     id: 'movieApp',
@@ -39,7 +39,7 @@ export const ProjectData: ProjectItem[] = [
     title: '영화 앱 클론',
     period: '약 2주',
     position: '1인 (기여도 100%)',
-    skill: 'React (Vite 기반), TypeScript, Styled-components, Github-pages'
+    skill: ['React(Vite 기반)', 'TypeScript', 'Styled-components', 'Github-pages']
   },
   {
     id: 'hcgHr',
@@ -47,7 +47,7 @@ export const ProjectData: ProjectItem[] = [
     comp: '(주)휴먼컨설팅그룹',
     title: '휴먼컨설팅그룹 HR 서비스 고도화',
     period: '2024.10 - 진행 중',
-    skill: 'Vue.js, JavaScript(ES6+), SCSS, HTML5, Figma'
+    skill: ['Vue.js', 'JavaScript(ES6+)', 'SCSS', 'HTML5', 'Figma']
   },
   {
     id: 'skBio',
@@ -56,7 +56,7 @@ export const ProjectData: ProjectItem[] = [
     title: '"SK바이오사이언스" HR 서비스',
     period: '2024.07 - 2024.09 (2개월)',
     position: '1인 (기여도 100%)',
-    skill: 'Vue.js, JavaScript(ES6+), SCSS, HTML5, Figma'
+    skill: ['Vue.js', 'JavaScript(ES6+)', 'SCSS', 'HTML5', 'Figma']
   },
   {
     id: 'gs',
@@ -65,7 +65,7 @@ export const ProjectData: ProjectItem[] = [
     title: '"GS칼텍스" 통합 HR 플랫폼 개발',
     period: '2024.02 - 2024.08 (6개월)',
     position: '1인 (기여도 100%)',
-    skill: 'JavaScript(ES6+), SCSS, HTML5, Figma'
+    skill: ['JavaScript(ES6+)', 'SCSS', 'HTML5', 'Figma']
   },
   {
     id: 'mmon',
@@ -74,7 +74,7 @@ export const ProjectData: ProjectItem[] = [
     title: '엠몬 솔루션 신규 구축 (회사 자체 솔루션)',
     period: '2022.02 - 2023.01 (11개월)',
     position: 'Project Leader (기여도 80%)',
-    skill: 'HTML5, SCSS, JavaScript, AdobeXD'
+    skill: ['HTML5', 'SCSS', 'JavaScript', 'AdobeXD']
   },
   {
     id: 'nStation',
@@ -83,7 +83,7 @@ export const ProjectData: ProjectItem[] = [
     title: '"내셔널지오그래픽" 온라인몰 리뉴얼',
     period: '2021.08 - 2021.12 (5개월)',
     position: 'Project Leader (기여도 80%)',
-    skill: 'HTML5, SCSS, JavaScript, AdobeXD'
+    skill: ['HTML5', 'SCSS', 'JavaScript', 'AdobeXD']
   },
   {
     id: 'hago',
@@ -92,7 +92,7 @@ export const ProjectData: ProjectItem[] = [
     title: '"HAGO" 쇼핑몰 리뉴얼',
     period: '2021.05 - 2021.08 (4개월)',
     position: 'Project Leader (기여도 80%)',
-    skill: 'HTML5, SCSS, JavaScript, AdobeXD'
+    skill: ['HTML5', 'SCSS', 'JavaScript', 'AdobeXD']
   },
   {
     id: 'fp',
@@ -101,6 +101,6 @@ export const ProjectData: ProjectItem[] = [
     title: '"패션플러스" 2021 리뉴얼',
     period: '2020.09 - 2021.01 (5개월)',
     position: 'Project Leader (기여도 80%)',
-    skill: 'HTML5, SCSS, JavaScript, jQuery, AdobeXD'
+    skill: ['HTML5', 'SCSS', 'JavaScript', 'jQuery', 'AdobeXD']
   },
 ]
