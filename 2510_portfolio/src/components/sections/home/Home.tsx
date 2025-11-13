@@ -12,7 +12,8 @@ import clsx from 'clsx';
 
 function Home() {
   const [isVisible, setIsVisible] = useState(false);
-  const [scrolledPastHeader, setScrolledPastHeader] = useState(false);
+  const [titleOffset, setTitleOffset] = useState(0);
+  const [showContent, setShowContent] = useState(false);
 
   // 페이지 진입 후 100ms 후 애니메이션 트리거
   useEffect(() => {
@@ -45,32 +46,69 @@ function Home() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // 스크롤 감지
+  // 스크롤에 따른 타이틀 및 컨텐츠 애니메이션
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      // 스크롤이 100px 이상이면 header 사라지고 content 나타남
-      setScrolledPastHeader(scrollY > 100);
+      const homeSection = document.getElementById('home');
+      if (!homeSection) return;
+
+      const homeTop = homeSection.offsetTop;
+      const homeHeight = homeSection.offsetHeight;
+      const scrollMiddle = scrollY + window.innerHeight / 2;
+
+      // 타이틀 움직일 거리 설정
+      const offset = Math.min(scrollY / 5, 100); // 0 ~ 100px 까지만 이동
+      setTitleOffset(offset);
+
+      // home 영역의 중간에 오면 content 보이게
+      const homeMiddle = homeTop + homeHeight / 2;
+      setShowContent(scrollMiddle >= homeMiddle);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [offset, setOffset] = useState(0);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const limitedOffset = Math.min(scrollY * 0.6, 300); // 적당히 제한
+    setOffset(limitedOffset);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
   return (
     <section id="home" className={styles.home}>
       <div className={styles.homeInner}>
-        <h3 className={clsx(
-          styles.homeTitle,
-          isVisible && !scrolledPastHeader && styles.visible,
-        )}>
-          <span>Hello,</span><span>I'm Hwi.</span>
-        </h3>
-        <div className={clsx(
-          styles.homeContent,
-          // isVisible && styles.visible,
-          scrolledPastHeader && styles.visible
-        )}>
+        {/* 상단 텍스트 */}
+        <div className={styles.textGroup}>
+          <div className={styles.text}>
+            <div className={styles.textContent} style={{ transform: `translate3d(${offset}px, 0, 0)` }}>
+              PARK SOO HWI
+            </div>
+            <div className={`${styles.textContent} ${styles.second}`} style={{ transform: `translate3d(-${offset}px, 0, 0)` }}>
+              FRONTEND
+            </div>
+          </div>
+          <div className={styles.text}>
+            <div className={styles.textBorder} style={{ transform: `translate3d(${offset}px, 0, 0)` }}>
+              PARK SOO HWI
+            </div>
+            <div className={`${styles.textBorder} ${styles.second}`} style={{ transform: `translate3d(-${offset}px, 0, 0)` }}>
+              FRONTEND
+            </div>
+          </div>
+        </div>
+        {/* //상단 텍스트 */}
+
+
+        <div className={clsx(styles.homeContent, showContent && styles.visible)}>
           <p>5년 이상의 퍼블리싱 경험을 바탕으로, UI 완성도와 협업에 강점을 가진 JavaScript 기반 프론트엔드 개발자 박수휘입니다.</p>
           <p>웹 퍼블리셔로 출발해 Vue.js 기반의 컴포넌트 개발 경험을 쌓으며 프론트엔드로 전향했습니다.</p>
           <p>현재는 React.js와 TypeScript로 기술 영역을 확장하며 컴포넌트 구조와 상태 관리 패턴을 익히고 있습니다.</p>

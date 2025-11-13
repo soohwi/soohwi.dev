@@ -11,7 +11,7 @@
 .home {
   display: flex;
   align-items: center;
-  height: 100vh;
+  height: 200vh;
   @include mixin.font('1.5rem' center);
   @include mixin.background(linear-gradient(#c4d8f6, #d8c4f6, #f5f5f7));
   // background-image: linear-gradient(to bottom, $color_main, #cdccfb, #c5d4fe, #c0dafd, #bfe0fb, #c6e3fa, #cde6f9, #d4e9f8, #dfebf9, #e8eef8, #eff1f8, $color_bg);
@@ -30,27 +30,25 @@
   // 타이틀
   &Title {
     width: 100%;
-    height: 100%;
-    @include mixin.font($color_white 700 '15rem');
+    height: 100vh;
+    @include mixin.font($color_white 300 '15rem');
 
     > span {
       display: block;
       position: absolute;
-      top: 50%;
-      @include mixin.transform(translateY(-50%));
       // opacity: 0;
-      @include mixin.transition(all $transition_slower);
+      @include mixin.transition(transform $transition_slow, left $transition_normal, right $transition_normal);
 
       &:first-child {
-        left: -10%;
-        margin-top: -5%;
-        // @include mixin.transform(translateX(-50%));
+        top: 30vh;
+        left: 0;
+        @include mixin.transform(translateX(-100%));
       }
 
       &:last-child {
-        right: -20%;
-        margin-bottom: -5%;
-        // @include mixin.transform(translateX(50%));
+        top: 50vh;
+        right: 0;
+        @include mixin.transform(translateX(100%));
       }
     }
 
@@ -58,13 +56,11 @@
       > span {
         opacity: 1;
         &:first-child {
-          left: 20%;
-          // @include mixin.transform(translateX(-20vw));
+          @include mixin.transform(translateX(0));
         }
 
         &:last-child {
-          right: 20%;
-          // @include mixin.transform(translateX(20vw));
+          @include mixin.transform(translateX(0));
         }
       }
     }
@@ -153,6 +149,37 @@
     @keyframes twinkle {
       0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
+    }
+  }
+}
+
+.textGroup {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  .text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 30%;
+
+    .textContent,
+    .textBorder {
+      font-size: 15rem;
+      font-weight: 700;
+      transition: transform 0.03s linear;
+      will-change: transform;
+    }
+
+    .textBorder {
+      color: transparent;
+      -webkit-text-stroke: .3rem white;
+    }
+
+    .second {
+      margin-top: 3rem;
     }
   }
 }
