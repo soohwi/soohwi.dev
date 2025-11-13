@@ -11,14 +11,15 @@ import styles from './home.module.scss';
 import clsx from 'clsx';
 
 function Home() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [titleOffset, setTitleOffset] = useState(0);
+  const [showTitle, setShowTitle] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [isTitleFixed, setIsTitleFixed] = useState(false);
+  const [titleOffset, setTitleOffset] = useState(0);
 
   // 페이지 진입 후 100ms 후 애니메이션 트리거
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setIsVisible(true);
+      setShowTitle(true);
     }, 100);
 
     return () => clearTimeout(timeout);
@@ -51,98 +52,91 @@ function Home() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const homeSection = document.getElementById('home');
+
       if (!homeSection) return;
 
-      const homeTop = homeSection.offsetTop;
-      const homeHeight = homeSection.offsetHeight;
-      const scrollMiddle = scrollY + window.innerHeight / 2;
-
-      // 타이틀 움직일 거리 설정
-      const offset = Math.min(scrollY / 5, 100); // 0 ~ 100px 까지만 이동
-      setTitleOffset(offset);
+      // 타이틀 움직임 범위
+      const limitedOffset = Math.min(scrollY * 0.6);
+      setTitleOffset(limitedOffset);
 
       // home 영역의 중간에 오면 content 보이게
-      const homeMiddle = homeTop + homeHeight / 2;
-      setShowContent(scrollMiddle >= homeMiddle);
+      const homeTop = homeSection.offsetTop;
+      const homeHeight = homeSection.offsetHeight;
+      const homeBottom = homeTop + homeHeight;
+      const scrollMiddle = scrollY + window.innerHeight / 2;
+      setShowContent(scrollMiddle >= homeTop + 500);
+
+      // 타이틀 fixed 여부
+      if (scrollY < homeBottom) {
+        setIsTitleFixed(true);
+      } else {
+        setIsTitleFixed(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [offset, setOffset] = useState(0);
-
-useEffect(() => {
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    const limitedOffset = Math.min(scrollY * 0.6, 300); // 적당히 제한
-    setOffset(limitedOffset);
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
-
   return (
     <section id="home" className={styles.home}>
-      <div className={styles.homeInner}>
-        {/* 상단 텍스트 */}
-        <div className={styles.textGroup}>
-          <div className={styles.text}>
-            <div className={styles.textContent} style={{ transform: `translate3d(${offset}px, 0, 0)` }}>
-              PARK SOO HWI
-            </div>
-            <div className={`${styles.textContent} ${styles.second}`} style={{ transform: `translate3d(-${offset}px, 0, 0)` }}>
-              FRONTEND
-            </div>
+      <div className={clsx(styles.homeInner, !isTitleFixed && styles.typeAbsolute)}>
+        <div className={clsx(styles.dim, showContent && styles.visible)}></div>
+        {/* 배경 (별/달) */}
+        <div className={styles.homeVisual}>
+          <div className={styles.moonBox}>
+            <p className={styles.moonInfo}><i className={styles.icon}></i>드래그로 달을 움직여 보세요 !</p>
+            <Canvas
+              style={{ position: "absolute", top: 0, left: 0 }}
+              camera={{ position: [0, 0, 5], fov: 60 }}
+            >
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[5, 5, 5]} />
+              <Moon />
+              <OrbitControls enableZoom={false} enablePan={false} />
+              <Stars radius={100} depth={50} count={500} factor={4} fade />
+            </Canvas>
           </div>
-          <div className={styles.text}>
-            <div className={styles.textBorder} style={{ transform: `translate3d(${offset}px, 0, 0)` }}>
-              PARK SOO HWI
-            </div>
-            <div className={`${styles.textBorder} ${styles.second}`} style={{ transform: `translate3d(-${offset}px, 0, 0)` }}>
-              FRONTEND
-            </div>
+          <div className={styles.starsBox}>
+            {Array.from({length: 150}).map((_, i) => (
+              <div className={styles.star}
+                key={i}
+                data-star
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 6 + 2}px`,
+                  height: `${Math.random() * 6 + 2}px`,
+                }}
+              />
+            ))}
           </div>
         </div>
-        {/* //상단 텍스트 */}
+        {/* //배경 (별/달) */}
 
+        {/* 타이틀 */}
+        <div className={clsx(styles.homeTitleBox, showTitle && !showContent && styles.visible)}>
+          <div className={clsx(styles.homeTitle, styles.typeSolid)}>
+            <p className={styles.textSolid} style={{ transform: `translate3d(${titleOffset}px, 0, 0)` }}>PARK SOO HWI</p>
+            <p className={`${styles.textSolid}`} style={{ transform: `translate3d(-${titleOffset}px, 0, 0)` }}>FRONTEND</p>
+          </div>
+          <div className={clsx(styles.homeTitle, styles.typeBorder)}>
+            <p className={styles.textBorder} style={{ transform: `translate3d(${titleOffset}px, 0, 0)` }}>PARK SOO HWI</p>
+            <p className={`${styles.textBorder}`} style={{ transform: `translate3d(-${titleOffset}px, 0, 0)` }}>FRONTEND</p>
+          </div>
+        </div>
+        {/* //타이틀 */}
 
+        {/* 컨텐츠 */}
         <div className={clsx(styles.homeContent, showContent && styles.visible)}>
-          <p>5년 이상의 퍼블리싱 경험을 바탕으로, UI 완성도와 협업에 강점을 가진 JavaScript 기반 프론트엔드 개발자 박수휘입니다.</p>
-          <p>웹 퍼블리셔로 출발해 Vue.js 기반의 컴포넌트 개발 경험을 쌓으며 프론트엔드로 전향했습니다.</p>
-          <p>현재는 React.js와 TypeScript로 기술 영역을 확장하며 컴포넌트 구조와 상태 관리 패턴을 익히고 있습니다.</p>
-          <p>사용자 중심의 UI를 구조적으로 설계하고 개선하는 데 강점이 있습니다.</p>
+          <div className={styles.homeContentInner}>
+            <p>5년 이상의 퍼블리싱 경험을 바탕으로, <strong>UI 완성도와 협업에 강점</strong>을 가진 JavaScript 기반 프론트엔드 개발자 박수휘입니다.</p>
+            <p>웹 퍼블리셔로 출발해 <strong>Vue.js 기반의 컴포넌트 개발 경험</strong>을 쌓으며 프론트엔드로 전향했습니다.</p>
+            <p><strong>현재는 React.js와 TypeScript로 기술 영역</strong>을 확장하며 컴포넌트 구조와 상태 관리 패턴을 익히고 있습니다.</p>
+            <p>사용자 중심의 UI를 구조적으로 설계하고 개선하는 데 강점이 있습니다.</p>
+          </div>
         </div>
-      </div>
-      <div className={styles.homeVisual}>
-        <div className={styles.moonBox}>
-          <p className={styles.moonInfo}><i className={styles.icon}></i>드래그로 달을 움직여 보세요 !</p>
-          <Canvas
-            style={{ position: "absolute", top: 0, left: 0 }}
-            camera={{ position: [0, 0, 5], fov: 60 }}
-          >
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[5, 5, 5]} />
-            <Moon />
-            <OrbitControls enableZoom={false} enablePan={false} />
-            <Stars radius={100} depth={50} count={500} factor={4} fade />
-          </Canvas>
-        </div>
-        <div className={styles.starsBox}>
-          {Array.from({length: 150}).map((_, i) => (
-            <div className={styles.star}
-              key={i}
-              data-star
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 6 + 2}px`,
-                height: `${Math.random() * 6 + 2}px`,
-              }}
-            />
-          ))}
-        </div>
+        {/* //컨텐츠 */}
       </div>
     </section>
   )

@@ -58,6 +58,7 @@
 
   &Item {
     position: relative;
+    z-index: 1;
     padding: 3rem;
     min-height: 20rem;
     border-radius: $borderRadius_base;
@@ -117,7 +118,7 @@
         -webkit-text-fill-color: transparent;
         animation: gradientMove 4s ease infinite;
 
-        @keyframes gradientMove {
+        @include mixin.keyframes(gradientMove) {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
@@ -130,9 +131,15 @@
     }
 
     .textRefer {
-      display: block;
-      margin: .6rem 0 -1.6rem;
+      position: absolute;
+      right: 2rem;
+      bottom: 1.6rem;
       @include mixin.font($gray_200 '1.2rem' right);
+
+      @include mixin.media(L) {
+        display: block;
+        margin: .6rem 0 -1.6rem;
+      }
 
       @include mixin.media(S) {
         margin: 1rem 0 -1rem;

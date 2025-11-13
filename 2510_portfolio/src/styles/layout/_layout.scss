@@ -43,6 +43,7 @@
 
   .hwiInner {
     position: relative;
+    z-index: 1;
     margin: 0 auto;
     padding-inline: 4rem;
     max-width: $minWidth_base;

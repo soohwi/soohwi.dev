@@ -76,6 +76,7 @@
 .projectSlider {
   overflow: hidden;
   position: relative;
+  z-index: 1;
   padding: 2rem 0;
 
   // 컨트롤러
@@ -144,7 +145,7 @@
     width: 31rem;
     min-height: 38.4rem;
     border-radius: $borderRadius_base;
-    background-image: linear-gradient(to bottom, $color_bg, #d5d8da 55%);
+    @include mixin.linear-gradient(#d5d8da, to bottom, $color_bg, #d5d8da 55%);
     @include mixin.transform(scale(1));
     @include mixin.transition(transform $transition_slow);
     // scroll-snap-align: start;

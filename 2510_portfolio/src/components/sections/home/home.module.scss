@@ -13,7 +13,7 @@
   align-items: center;
   height: 200vh;
   @include mixin.font('1.5rem' center);
-  @include mixin.background(linear-gradient(#c4d8f6, #d8c4f6, #f5f5f7));
+  @include mixin.linear-gradient(#f5f5f7, #c4d8f6, #d8c4f6, #f5f5f7);
   // background-image: linear-gradient(to bottom, $color_main, #cdccfb, #c5d4fe, #c0dafd, #bfe0fb, #c6e3fa, #cde6f9, #d4e9f8, #dfebf9, #e8eef8, #eff1f8, $color_bg);
   // background-image: linear-gradient(to bottom, #c4d8f6, #c5d5f8, #c8d2f9, #cbcef9, #d0caf8, #d4ccf8, #d8cff8, #dcd1f8, #e1daf9, #e6e4f9, #edecf8, #f5f5f7);
   // light: #F5F5F7, #D8C4F6
@@ -24,57 +24,103 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    // pointer-events: none;
+    pointer-events: none;
+
+    &.typeAbsolute {
+      .homeTitleBox .homeTitle,
+      .homeVisual .moonBox {
+        position: absolute;
+      }
+    }
+
+    .dim {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      background-image: linear-gradient(to bottom, #000, #f5f5f7);
+      @include mixin.transition(all $transition_slower);
+
+      &.visible {
+        opacity: 1;
+      }
+    }
   }
 
   // 타이틀
-  &Title {
+  &TitleBox {
+    overflow: hidden;
+    position: relative;
     width: 100%;
     height: 100vh;
-    @include mixin.font($color_white 300 '15rem');
+    @include mixin.font($color_white 900 '15rem');
+    opacity: 0;
+    pointer-events: none;
+    @include mixin.transition(opacity $transition_slow);
 
-    > span {
-      display: block;
-      position: absolute;
-      // opacity: 0;
-      @include mixin.transition(transform $transition_slow, left $transition_normal, right $transition_normal);
+    .homeTitle {
+      position: fixed;
+      top: 25vh;
+      width: 100%;
 
-      &:first-child {
-        top: 30vh;
-        left: 0;
-        @include mixin.transform(translateX(-100%));
+      > p {
+        @include mixin.transform(translate3d(-10vw, 0, 0));
+        @include mixin.transition(transform .03s linear);
+        will-change: transform;
       }
 
-      &:last-child {
-        top: 50vh;
-        right: 0;
-        @include mixin.transform(translateX(100%));
+      &.typeBorder {
+        z-index: 1;
+
+        > p {
+          color: transparent;
+          -webkit-text-stroke: .5rem $color_white;
+        }
       }
     }
 
     &.visible {
-      > span {
-        opacity: 1;
-        &:first-child {
-          @include mixin.transform(translateX(0));
-        }
-
-        &:last-child {
-          @include mixin.transform(translateX(0));
-        }
-      }
+      opacity: 1;
     }
   }
 
   // 컨텐츠 내용
   &Content {
-    @include mixin.font($color_white 500 '1.8rem/1.9');
+    position: relative;
+    z-index: 1;
+    @include mixin.font($color_secondary_dark 500 '2rem/3rem');
     opacity: 0;
     @include mixin.transform(translateY(10rem));
-    @include mixin.transition(all $transition_slower);
+    @include mixin.transition(all $transition_slow);
 
-   &.visible {
-      color: $color_secondary_dark;
+    &Inner {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 3rem 0;
+      padding: 8rem 2rem;
+      width: 70vw;
+      border-radius: 3rem;
+      // background-color: $color_white;
+
+      strong {
+        margin: 0 1rem;
+        @include mixin.font(700 '3rem');
+        @include mixin.background(linear-gradient(90deg, $color_main, $color_secondary, $color_bg, #a6b8d2) '/300% 50%');
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientMove 4s ease infinite;
+
+        @include mixin.keyframes(gradientMove) {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      }
+    }
+
+    &.visible {
       opacity: 1;
       @include mixin.transform(translateY(0));
     }
@@ -83,9 +129,11 @@
   // 홈 비주얼
   &Visual {
     .moonBox {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
       height: 100vh;
       pointer-events: none; // 달은 움직임만 보여주고 클릭 방지
       opacity: .6;
@@ -114,7 +162,7 @@
         }
       }
 
-      @keyframes floating {
+      @include mixin.keyframes(floating) {
         0%   { transform: translateY(0); }
         50%  { transform: translateY(-1rem); }
         100% { transform: translateY(0); }
@@ -128,11 +176,11 @@
 
     .starsBox {
       overflow: hidden;
-      position: absolute;
+      position: fixed;
       z-index: 0;
       top: 0;
       left: 0;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       pointer-events: none;
 
@@ -146,40 +194,9 @@
       }
     }
 
-    @keyframes twinkle {
+    @include mixin.keyframes(twinkle) {
       0%, 100% { opacity: 0.3; }
       50% { opacity: 1; }
-    }
-  }
-}
-
-.textGroup {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-
-  .text {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    top: 30%;
-
-    .textContent,
-    .textBorder {
-      font-size: 15rem;
-      font-weight: 700;
-      transition: transform 0.03s linear;
-      will-change: transform;
-    }
-
-    .textBorder {
-      color: transparent;
-      -webkit-text-stroke: .3rem white;
-    }
-
-    .second {
-      margin-top: 3rem;
     }
   }
 }
