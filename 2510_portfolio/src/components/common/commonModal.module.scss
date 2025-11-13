@@ -50,6 +50,11 @@
     border-radius: 2.5rem;
     background-color: $color_bg;
     // background-color: $color_white;
+
+    @include mixin.media(L) {
+      width: 95vw;
+      max-width: none;
+    }
   }
 
   // 헤더
@@ -59,6 +64,14 @@
     justify-content: space-between;
     margin: 0 $modal_side_margin;
 
+    @include mixin.media(L) {
+      margin: 0 calc($modal_side_margin - 1rem);
+    }
+
+    @include mixin.media(S) {
+      margin: 0 calc($modal_side_margin - 2rem);
+    }
+
     // 타이틀
     .modalTitle {
       @include mixin.font($gray_800 700 '2rem');
@@ -66,13 +79,23 @@
 
     // 닫기버튼
     .modalBtnClose {
-      width: 2rem;
-      height: 2rem;
+      width: 2.5rem;
+      height: 2.5rem;
 
       .icon {
         width: 100%;
         height: 100%;
-        @include mixin.svg($gray_800 url('/assets/icon/icon_close.svg') '/2rem' no-repeat);
+        @include mixin.svg($gray_800 url('/assets/icon/icon_close.svg') '/2.5rem' no-repeat);
+      }
+
+      @include mixin.media(S) {
+        width: 2rem;
+        height: 2rem;
+
+        .icon {
+          mask-size: 2rem;
+          -webkit-mask-size: 2rem;
+        }
       }
     }
   }
@@ -82,5 +105,15 @@
     overflow: auto;
     margin: 0 $modal_side_margin;
     padding-bottom: $modal_side_margin;
+
+    @include mixin.media(L) {
+      margin: 0 calc($modal_side_margin - 1rem);
+      padding-bottom: calc($modal_side_margin - 1rem);
+    }
+
+    @include mixin.media(S) {
+      margin: 0 calc($modal_side_margin - 3rem);
+      padding-bottom: calc($modal_side_margin - 3rem);
+    }
   }
 }

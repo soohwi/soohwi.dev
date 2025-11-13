@@ -11,7 +11,7 @@ function Career() {
     <section id="career" className={styles.career}>
       <div className="hwiInner">
         {/* 타이틀 */}
-        <h3 className="hwiTitle">&#60;Career &#47;&#62;</h3>
+        <h3 className="hwiTitle">Career</h3>
         {/*-- 타이틀 */}
 
         {/* 경력리스트 */}

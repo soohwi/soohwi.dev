@@ -19,10 +19,28 @@
   height: 2rem;
   @include mixin.svg('/2rem' no-repeat);
 }
+
+.badgeSkill {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: 1rem;
+
+  li {
+    padding: .3rem 1rem .1rem;
+    border-radius: .4rem;
+    background-color: $color_tertiary;
+  }
+}
 //> 레이아웃 & 공통
 
 //< 탭메뉴
 .projectTab {
+  @include mixin.media(S) {
+    margin-left: -1.5rem;
+    white-space: nowrap;
+  }
+
   ul {
     display: flex;
     gap: 0 .5rem;
@@ -31,8 +49,11 @@
       position: relative;
       padding: .5rem 1.5rem;
       @include mixin.font($gray_200 '1.6rem');
-      font-size: 1.6rem;
       @include mixin.transition(all $transition_normal);
+
+      @include mixin.media(S) {
+        font-size: 1.4rem;
+      }
 
       &.tabOn,
       &:hover {
@@ -104,6 +125,14 @@
   scroll-behavior: smooth;
   // scroll-snap-type: x mandatory;
 
+  @include mixin.media(L) {
+    padding-inline: 4rem;
+  }
+
+  @include mixin.media(S) {
+    padding-inline: 2rem;
+  }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -147,9 +176,17 @@
       padding-block: 2.5rem;
       height: 100%;
 
+      @include mixin.media(S) {
+        gap: 3rem 0;
+      }
+
       .thumb {
         width: 100%;
         height: 19rem;
+
+        @include mixin.media(S) {
+          height: 15rem;
+        }
 
         img {
           width: 100%;
@@ -164,19 +201,20 @@
 
         .textComp {
           @include mixin.font($gray_300 700 '1.6rem');
+
+          @include mixin.media(S) {
+            font-size: 1.4rem;
+          }
         }
 
         .textTitle {
           margin-top: 1.5rem;
           @include mixin.font(700 '2.4rem');
           word-break: keep-all;
-        }
 
-        .textSkill {
-          margin-top: .5rem;
-          @include mixin.font($gray_300 700);
-          word-break: keep-all;
-          text-decoration: underline;
+          @include mixin.media(S) {
+            font-size: 2rem;
+          }
         }
       }
     }
@@ -210,8 +248,6 @@
 //< 프로젝트 모달 컨텐츠
 .modalDetail {
   // 프로젝트 type
-  // $projects: ('hwitter', pink), ('movieApp', pink), ('hcgHr', pink), ('skBio', #E9002D), ('gs', #009999), ('mmon', #25272A),
-  // ('nStation', #000), ('hago', #0B3148), ('fp', #bc0919);
   $projects:
   ('portfolio', #eae8f1), ('hwitter', #e8e8e8), ('movieApp', #e8e8e8),
   ('hcgHr', #e3efef), ('skBio', #f7e8ec), ('gs', #e3efef),
@@ -228,10 +264,15 @@
 
   // 상단 프로젝트 정보
   .modalInfo {
-    padding: $modal_inner_padding;
+    padding: $modal_inner_padding calc($modal_inner_padding - 1rem);
     @include mixin.font($gray_800 '1.6rem');
     border-radius: $borderRadius_base;
     background-color: $color_white;
+
+    @include mixin.media(S) {
+      padding: calc($modal_inner_padding - 1rem);
+      font-size: 1.4rem;
+    }
 
     &Title {
       margin-bottom: 4rem;
@@ -239,16 +280,42 @@
       .infoTitle {
         @include mixin.font(700 '3.5rem');
       }
+
+      @include mixin.media(S) {
+        margin-bottom: 2rem;
+
+        .infoTitle {
+          font-size: 2.3rem;
+        }
+      }
     }
 
+    // 기여도 및 포지션
     .infoPosition {
       text-decoration: underline;
+    }
+
+    // 기술 뱃지
+    .badgeSkill {
+      li {
+        @include mixin.font($gray_300 '1.4rem');
+        border: .1rem solid $gray_300;
+        background-color: transparent;
+
+        @include mixin.media(S) {
+          font-size: 1.2rem;
+        }
+      }
     }
 
     dl {
       display: flex;
       gap: 0 2rem;
       margin-top: .5rem;
+
+      @include mixin.media(S) {
+        gap: 0;
+      }
 
       &:first-of-type {
         margin-top: 1.5rem;
@@ -286,12 +353,26 @@
         &.typeGit {
           .btnLinkIcon {
             margin: -.1rem 0 .1rem;
-            @include mixin.svg($gray_800 url('/assets/icon/icon_github.png') '/1.5rem' no-repeat);
+            mask-image: url('/assets/icon/icon_github.png');
+            -webkit-mask-image: url('/assets/icon/icon_github.png');
           }
         }
 
         &:hover {
-          background-color: pink;
+          background-color: $color_main;
+        }
+
+        @include mixin.media(S) {
+          height: 3rem;
+          font-size: 1.2rem;
+          border-radius: .4rem;
+
+          &Icon {
+            width: 1.2rem;
+            height: 1.2rem;
+            mask-size: 1.2rem;
+            -webkit-mask-size: 1.2rem;
+          }
         }
       }
     }
@@ -301,7 +382,6 @@
   // 보안문구
   .textSecurity {
     display: flex;
-    align-items: center;
     gap: .4rem;
     margin: 4rem 1rem -3rem;
     @include mixin.font($warning 700 '1.5rem');
@@ -312,9 +392,23 @@
     }
 
     .icon {
+      flex: 0 0 2rem;
+      margin-top: .1rem;
       width: 2rem;
       height: 2rem;
       @include mixin.svg($warning url('/assets/icon/icon_warning.svg') '/2rem' no-repeat);
+    }
+
+    @include mixin.media(S) {
+      font-size: 1.2rem;
+
+      .icon {
+        flex: 0 0 1.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        mask-size: 1.5rem;
+        -webkit-mask-size: 1.5rem;
+      }
     }
   }
 
@@ -326,7 +420,7 @@
   // 프로젝트 컨텐츠
   .modalContent {
     margin-top: 4rem;
-    padding: $modal_inner_padding;
+    padding: $modal_inner_padding calc($modal_inner_padding - 1rem);
     border-radius: $borderRadius_base;
     background-color: $color_white;
   }
@@ -335,6 +429,10 @@
   .modalSection {
     @include mixin.font($gray_800 '1.8rem');
 
+    @include mixin.media(S) {
+      font-size: 1.4rem;
+    }
+
     &:not(:first-of-type) {
       margin-top: 4rem;
     }
@@ -342,15 +440,27 @@
     .modalSubTitle {
       margin-bottom: 1rem;
       @include mixin.font(700 '2rem');
+
+      @include mixin.media(S) {
+        font-size: 1.8rem;
+      }
     }
 
     ul.modalList {
       padding: 0 1rem;
 
+      @include mixin.media(S) {
+        padding: 0;
+      }
+
       li {
         position: relative;
         margin-top: .5rem;
         padding-left: 1.5rem;
+
+        @include mixin.media(S) {
+          padding-left: 1rem;
+        }
 
         &::before {
           position: absolute;
@@ -361,6 +471,12 @@
           border-radius: 100%;
           background-color: $gray_800;
           content: '';
+
+          @include mixin.media(S) {
+            top: .8rem;
+            width: .3rem;
+            height: .3rem;
+          }
         }
       }
     }
@@ -372,17 +488,29 @@
         padding-left: 1rem;
         counter-increment: issue;
 
+        @include mixin.media(S) {
+          padding-left: 0;
+        }
+
         .textIssueTitle {
+          display: flex;
+          gap: .8rem;
           font-weight: 700;
 
           &::before {
-            margin: .1rem .8rem 0 0;
+            margin-top: .1rem;
             min-width: 2.1rem;
             height: 2.1rem;
             @include mixin.font($color_white '1.6rem/2.4rem' center);
             border-radius: 100%;
-            background-color: $color_main;
+            background-color: $color_tertiary;
             content: counter(issue);
+
+            @include mixin.media(S) {
+              min-width: 1.9rem;
+              height: 1.9rem;
+              @include mixin.font('1.2rem/2.1rem');
+            }
           }
         }
 

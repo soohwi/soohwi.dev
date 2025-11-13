@@ -13,11 +13,18 @@ $color_main_light: #e3ddf9;
 // $color_main_dark: ;
 
 $color_secondary: #a7c699;
+$color_secondary_dark: #291853;
+
+$color_tertiary: #d0dbeb;
+
+$color_pointer: #f9f871;
 
 $gray_50: #f5f5f7;
 $gray_100: #e2e2e3;
+$gray_150: #d1d1d6;
 $gray_200: #c4c2ca;
 $gray_300: #999;
+$gray_500: #96a7c0;
 $gray_800: #4a4854;
 
 // // === 의미 색상 ===
@@ -34,7 +41,6 @@ $warning: #ffad1f;
 // $gray_200: #e1e8ed;
 // $gray_300: #cfd9de;
 // $gray_400: #aab8c2;
-// $gray_500: #8899a6;
 // $gray_600: #66757f;
 // $gray_700: #536471;
 // $gray_800: #3c4043;
@@ -61,6 +67,7 @@ $zIndex_modal: 100;
 // $transition-fast: .1s ease;
 $transition_normal: .2s ease;
 $transition_slow: .3s ease-in-out;
+$transition_slower: .8s ease-in-out;
 // $transition-bounce: .3s cubic-bezier(0.34, 1.56, 0.64, 1);
 //> 기타
 
@@ -92,7 +99,7 @@ $minWidth_base: 136rem;// mobile 320px
 // 모달
 $modal_header_height: 7rem;
 $modal_side_margin: 4rem;
-$modal_inner_padding: 3rem 2rem;
+$modal_inner_padding: 3rem;
 // $modal_width_base: 500px;
 // $modal_width_sm: 412px;
 // $modal_width_lg: 700px;

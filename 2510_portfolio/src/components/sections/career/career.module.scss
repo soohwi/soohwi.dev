@@ -26,6 +26,12 @@
     border-radius: $borderRadius_base;
     background-color: $color_white;
 
+    @include mixin.media(S) {
+      gap: 1rem;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
     dl {
       dt {
         @include mixin.font(700 '2rem');
@@ -52,6 +58,13 @@
       border: .1rem solid $gray_100;
       border-radius: 1rem;
       @include mixin.background(#fff url('/assets/images/project/logo_#{$logo}.jpg') '/6rem' no-repeat);
+
+      @include mixin.media(S) {
+        flex: 0 0 4rem;
+        width: 4rem;
+        height: 4rem;
+        background-size: 4rem;
+      }
     }
   }
   //> 경력리스트

@@ -17,15 +17,24 @@
     padding: 8rem 0;
     border-radius: $borderRadius_base;
     background-color: $color_white;
+
+    @include mixin.media(S) {
+      padding: 5rem 0 2rem;
+    }
   }
 
   &Inner {
-    padding-inline: min(7vw, 10.5rem);
+    padding-inline: min(5vw, 10.5rem);
   }
 
   &Sub {
     margin-bottom: 2rem;
     @include mixin.font(700 '2rem');
+
+    @include mixin.media(S) {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
 
     span {
       color: $gray_200;
@@ -40,6 +49,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+
+    @include mixin.media(L) {
+      grid-template-columns: 1fr;
+      gap: 1rem 0;
+    }
   }
 
   &Item {
@@ -49,32 +63,80 @@
     border-radius: $borderRadius_base;
     background-color: $color_bg;
 
+    @include mixin.media(L) {
+      padding: 2.5rem;
+      min-height: auto;
+      border-radius: 1.5rem;
+    }
+
+    @include mixin.media(S) {
+      padding: 1.5rem;
+    }
+
     &:last-child {
       grid-column: 1 / span 3;
+
+      @include mixin.media(L) {
+        grid-column: 1;
+      }
     }
 
     .textTitle {
       margin-bottom: 1.5rem;
       @include mixin.font($gray_200 700 '2rem');
+
+      @include mixin.media(S) {
+        margin-bottom: .5rem;
+        font-size: 1.6rem;
+      }
     }
 
     .skillsComp {
-      @include mixin.font($gray_200 700 '2rem');
+      @include mixin.font($gray_300 '1.6rem/2.8rem');
 
-      li:not(:first-child) {
-        margin-top: 1rem;
+      @include mixin.media(S) {
+        @include mixin.font('1.4rem/2.3rem');
+      }
+
+      li {
+        word-break: keep-all;
+
+        &:not(:first-child) {
+          margin-top: 1rem;
+
+          @include mixin.media(S) {
+            margin-top: .6rem;
+          }
+        }
       }
 
       strong {
-        color: $gray_800;
+        @include mixin.font(700 '2rem');
+        @include mixin.background(linear-gradient(90deg, #a6b8d2, #d8c4f6, #a6b8d2) '/300% 100%');
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientMove 4s ease infinite;
+
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        @include mixin.media(S) {
+          font-size: 1.6rem;
+        }
       }
     }
 
     .textRefer {
-      position: absolute;
-      right: 1.8rem;
-      bottom: .8rem;
+      display: block;
+      margin: .6rem 0 -1.6rem;
       @include mixin.font($gray_200 '1.2rem' right);
+
+      @include mixin.media(S) {
+        margin: 1rem 0 -1rem;
+      }
     }
   }
 }

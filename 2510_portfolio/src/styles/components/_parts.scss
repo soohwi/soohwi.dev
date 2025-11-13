@@ -14,6 +14,11 @@
   border-radius: 1rem;
   background-color: $gray_100;
 
+  @include mixin.media(S) {
+    padding: .3rem .9rem .1rem;
+    border-radius: .4rem;
+  }
+
   &Mark {
     position: relative;
     color: $gray_800;
@@ -31,6 +36,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: .7rem;
+
+    @include mixin.media(S) {
+      gap: .4rem;
+    }
   }
 }
 //> 뱃지
