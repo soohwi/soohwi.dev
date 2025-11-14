@@ -26,8 +26,10 @@ export interface ProjectDetail {
   techStack?: string[];// 기술 스택 및 구조적 시도
   issues?: {// 문제 해결 사례
     title: string;
-    desc: string;
+    summary: string;
+    cause?: string[];
     img?: string;
+    solution?: string[];
   }[];
   //> 개인
 }
@@ -36,6 +38,9 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: `portfolio`,
     title: `포트폴리오`,
+    link: ``,
+    git: ``,
+
   },
   {
     id: `hwitter`,
@@ -71,23 +76,39 @@ export const ProjectDetailData: ProjectDetail[] = [
     issues: [
       {
         title: `실시간 데이터 구독으로 수정/삭제 후 자동 반영 구현`,
-        desc:
-          `Firestore 데이터를 getDocs()로 1회성으로 가져오던 기존 방식은 트윗 수정/삭제 후 UI 반영이 되지 않아,
-            onSnapshot()으로 변경해 실시간 동기화를 구현했습니다.
-            또한 구독 해제를 위한 unsubscribe() 처리로 메모리 누수 방지도 함께 고려했습니다.`
+        summary:`트윗 수정이나 삭제가 이루어져도 프로필 페이지의 트윗 목록에는 실시간으로 반영되지 않음`,
+        cause: [
+          `기존에는 getDocs()로 트윗 목록을 단발성으로 조회했기 때문에, 변경 사항이 발생해도 새로고침을 하지 않는 이상 화면에 반영안됨`
+        ],
+        img: ``,
+        solution: [
+          `onSnapshot()을 활용해 Firebase Firestore의 컬렉션 변경 사항을 실시간으로 구독하도록 변경`,
+          `구독 중인 리스너는 unsubscribe()로 컴포넌트 언마운트 시 제거해 요금 최적화와 메모리 누수 방지`
+        ]
       },
       {
-        title: `Firebase에 undefined 필드 전송 시 에러 해결`,
-        desc:
-          `트윗 작성 시 이미지 첨부(fileData)가 선택 사항이기 때문에, undefined가 Firebase로 전송되어 에러가 발생했습니다.
-            이를 조건부 스프레드 문법으로 해결하여 TypeScript의 객체 안정성과 Firebase 제약을 모두 만족시켰습니다.`
+        title: `Firebase에 undefined 필드 전송 시 에러 발생`,
+        summary: `이미지 없이 트윗을 등록할 경우, fileData가 undefined로 전달되면서 Firebase addDoc() 함수에서 에러가 발생`,
+        cause: [
+          `Firebase는 undefined 값을 허용하지 않기 때문에, 해당 필드를 명시적으로 제거하지 않으면 Unsupported field value: undefined 에러 발생`
+        ],
+        img: ``,
+        solution: [
+          `fileData가 undefined인 경우, 해당 필드를 제외하고 객체를 전송하도록 구조 분해 및 조건부 키 추가를 사용해 처리`
+        ]
       },
       {
-        title: `verbatimModuleSyntax 활성화로 인한 타입 import 에러 해결`,
-        desc:
-          `tsconfig.json에 verbatimModuleSyntax: true 설정이 활성화된 경우, 타입만 사용하는 import는 import type으로 구분해야 합니다.
-            이를 따르지 않으면 타입 import 에러가 발생하는데, 이 경험을 통해 모듈 최적화 설정과 타입 전용 import의 필요성을 체득했습니다.`,
-        img: `/assets/images/project/hwitter/type-import-error.png` // 예시
+        title: `verbatimModuleSyntax 활성화로 타입 import 에러 발생`,
+        summary: `TweetType과 같은 타입을 일반 import로 불러올 경우, TypeScript에서 에러가 발생해 컴파일이 중단`,
+        cause: [
+          `tsconfig.json에 verbatimModuleSyntax: true 옵션이 활성화되어 있으면, 타입 전용 import는 반드시 import type을 사용해야 함`,
+          `일반 import로 타입을 가져오면 "is a type and must be imported using a type-only import" 에러가 발생`
+        ],
+        img: ``,
+        solution: [
+          `타입은 import type을 사용해 명확하게 타입 전용으로 가져오도록 수정`,
+          `verbatimModuleSyntax를 유지하면서도 컴파일 오류 없이 타입 안정성을 확보 가능`
+        ]
       }
     ],
     reflection: [
@@ -126,25 +147,55 @@ export const ProjectDetailData: ProjectDetail[] = [
     issues: [
       {
         title: `웹폰트 import 오류`,
-        desc:
-          `Pretendard Variable 웹폰트 적용 시 경로 문제와 타입 선언 누락으로 빌드 오류 발생
-          → vite 환경에서 경로 재설정 및 declaration 파일 분리로 해결`,
-        img: `/assets/images/project/movieApp/font-issue.png`
+        summary: `Pretendard Variable 웹폰트가 정상적으로 로드되지 않아 스타일이 기본 시스템 폰트로 fallback되는 현상이 발생`,
+        cause: [
+          `public/font/ 폴더 하위의 .woff2 파일을 src 내부에서 직접 import 하려다 TypeScript에서 타입 오류 발생`,
+          `Vite 환경에서는 public 폴더에 있는 자산은 url()로만 접근 가능하며, import 방식으로 직접 참조 불가`
+        ],
+        img: `/assets/images/project/movieApp/font-issue.png`,
+        solution: [
+          `.woff2 타입을 선언하기 위해 declarations.d.ts 파일에 타입 정의 추가`,
+          `GlobalStyle.ts에서 @font-face 선언 시 import 방식으로 적용`,
+        ]
       },
       {
-        title: `SVG 마스크 방식 아이콘 배포 시 깨짐 → SVGR 도입`,
-        desc: `img 태그 사용 시 뷰포트 크기에 따라 마스크가 깨지는 현상이 있어 SVGR을 사용해 React 컴포넌트로 전환함`,
-        img: `/assets/images/project/movieApp/svg-issue.png`
+        title: `SVG 마스크 아이콘 배포 시 깨짐`,
+        summary: `마스크 방식(mask, -webkit-mask)으로 구현한 SVG 아이콘이 로컬 개발환경에서는 정상적으로 보이지만, GitHub Pages 배포 시 마스크가 깨지고 아이콘이 표시되지 않음`,
+        cause: [
+          `CSS 마스크 방식에서는 url('/src/assets/...') 식의 절대경로 사용 시 Vite의 base 설정과 충돌이 발생해 배포 후 파일 경로를 제대로 참조하지 못함`
+        ],
+        img: `/assets/images/project/movieApp/svg-issue.png`,
+        solution: [
+          `CSS 마스크 방식을 제거하고, vite-plugin-svgr을 사용해 SVG를 React 컴포넌트로 import`,
+          `아이콘을 컴포넌트로 렌더링하여 스타일링`
+        ]
       },
       {
-        title: `useParams 타입 오류`,
-        desc: ``,
-        img: `/assets/images/project/movieApp/scroll-issue.png`
+        title: `API 응답 누락 방지`,
+        summary: `YTS API를 통해 영화를 불러올 때 일부 데이터에서 genres 또는 description_full이 누락되어, 컴포넌트 렌더링 도중 오류가 발생하거나, 페이지에 undefined가 표시되는 문제가 발생`,
+        cause: [
+          `API에서 genres는 영화에 따라 없거나 빈 배열일 수 있음`,
+          `description_full은 API 응답에 따라 존재하지 않을 수 있음`,
+          `하지만 types/movie.ts에서는 모든 필드를 **필수(required)**로 정의하고 있어, 타입 검사와 렌더링 중 오류가 발생`
+        ],
+        img: `/assets/images/project/movieApp/scroll-issue.png`,
+        solution: [
+          `description_full을 optional 속성으로 수정`,
+          `데이터 렌더링 시 fallback 처리`,
+          `genre 접근 시 optional chaining 사용`
+        ]
       },
       {
         title: `긴 설명 텍스트 가독성 문제`,
-        desc: ``,
-        img: `/assets/images/project/movieApp/scroll-issue.png`
+        summary: `영화 상세 설명(description_full)이 너무 길어 페이지 레이아웃이 깨지거나, 가독성이 떨어지는 UI가 됨`,
+        cause: [
+          `API에서 제공하는 영화 설명은 길이에 제한이 없어 한 페이지에 너무 많은 텍스트가 노출됨`,
+          `모바일 뷰에서 사용자 경험(UX) 저하`
+        ],
+        img: `/assets/images/project/movieApp/svg-issue.png`,
+        solution: [
+          `설명이 특정 길이 이상일 경우 잘라서 보여주고, "전체보기 / 접기" 버튼으로 토글 처리`
+        ]
       }
     ],
     reflection: [

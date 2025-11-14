@@ -125,7 +125,34 @@ function ProjectCardModal({ item, detail }: ProjectCardModalProps) {
               {detail.issues?.map((text, idx) => (
                 <li key={`issues-${idx}`}>
                   <p className={styles.textIssueTitle}>{text.title}</p>
-                  <p className={styles.textIssueDesc}>{text.desc}</p>
+                  <p>{text.summary}</p>
+
+                  {text.cause && (
+                    <dl>
+                      <dt>원인</dt>
+                      <dd>
+                        <ul className={styles.modalList}>
+                          {text.cause?.map((item, idx) => (
+                            <li className={styles.textIssueDesc} key={idx}>{item}</li>
+                          ))}
+                        </ul>
+                      </dd>
+                    </dl>
+                  )}
+
+                  {text.solution && (
+                    <dl>
+                      <dt>해결방법</dt>
+                      <dd>
+                        <ul className={styles.modalList}>
+                          {text.solution?.map((item, idx) => (
+                            <li className={styles.textIssueDesc} key={idx}>{item}</li>
+                          ))}
+                        </ul>
+                      </dd>
+                    </dl>
+                  )}
+
                   <div className={styles.textIssueImg}>
                     <img src={text.img} alt="코드 이미지" />
                   </div>
