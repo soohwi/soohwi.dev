@@ -12,9 +12,11 @@ import clsx from 'clsx';
 
 function Home() {
   const [showTitle, setShowTitle] = useState(false);
+  const [hideTitle, setHideTitle] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [isTitleFixed, setIsTitleFixed] = useState(false);
   const [titleOffset, setTitleOffset] = useState(0);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   // 페이지 진입 후 100ms 후 애니메이션 트리거
   useEffect(() => {
@@ -24,7 +26,6 @@ function Home() {
 
     return () => clearTimeout(timeout);
   }, []);
-
 
   // 별 배경 마우스위치에 따른 움직임 이벤트
   useEffect(() => {
@@ -42,12 +43,13 @@ function Home() {
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
 
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // 스크롤에 따른 타이틀 및 컨텐츠 애니메이션
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -56,32 +58,56 @@ function Home() {
       if (!homeSection) return;
 
       // 타이틀 움직임 범위
-      const limitedOffset = Math.min(scrollY * 0.6);
-      setTitleOffset(limitedOffset);
+      setTitleOffset(Math.min(scrollY * 0.6));
 
-      // home 영역의 중간에 오면 content 보이게
+      // home 위치값
       const homeTop = homeSection.offsetTop;
       const homeHeight = homeSection.offsetHeight;
       const homeBottom = homeTop + homeHeight;
       const scrollMiddle = scrollY + window.innerHeight / 2;
-      setShowContent(scrollMiddle >= homeTop + 500);
 
-      // 타이틀 fixed 여부
-      if (scrollY < homeBottom) {
-        setIsTitleFixed(true);
-      } else {
-        setIsTitleFixed(false);
-      }
+      // title 숨기기
+      setHideTitle(scrollMiddle >= (homeTop + 800));
+
+      // home 영역의 중간에 오면 content 보이게
+      setShowContent(scrollMiddle >= homeTop + 700);
+
+      // fixed 여부
+      setIsTitleFixed(scrollY < homeBottom);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // 다크모드 테마 적용
+  useEffect(() => {
+    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const initialTheme = saved || 'light';
+
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    setTheme(initialTheme);
+  }, []);
+
+  const handleThemeToggle = () => {
+    const changeTheme = theme === 'dark' ? 'light' : 'dark';
+
+    document.documentElement.setAttribute('data-theme', changeTheme);
+    localStorage.setItem('theme', changeTheme);
+
+    setTheme(changeTheme);
+  };
 
   return (
     <section id="home" className={styles.home}>
+      <button
+        className={clsx(styles.themeToggle)}
+        aria-label="다크모드 토글"
+        onClick={handleThemeToggle}
+      >
+        <i className={styles.icon}></i>
+      </button>
       <div className={clsx(styles.homeInner, !isTitleFixed && styles.typeAbsolute)}>
-        <div className={clsx(styles.dim, showContent && styles.visible)}></div>
         {/* 배경 (별/달) */}
         <div className={styles.homeVisual}>
           <div className={styles.moonBox}>
@@ -115,14 +141,14 @@ function Home() {
         {/* //배경 (별/달) */}
 
         {/* 타이틀 */}
-        <div className={clsx(styles.homeTitleBox, showTitle && !showContent && styles.visible)}>
+        <div className={clsx(styles.homeTitleBox, showTitle && !hideTitle && styles.visible)}>
           <div className={clsx(styles.homeTitle, styles.typeSolid)}>
-            <p className={styles.textSolid} style={{ transform: `translate3d(${titleOffset}px, 0, 0)` }}>PARK SOO HWI</p>
-            <p className={`${styles.textSolid}`} style={{ transform: `translate3d(-${titleOffset}px, 0, 0)` }}>FRONTEND</p>
+            <p className={styles.text} style={{ transform: `translate3d(${titleOffset}px, 0, 0)` }}>PARK<br/> SOO HWI</p>
+            <p className={styles.text} style={{ transform: `translate3d(-${titleOffset}px, 0, 0)` }}>FRONTEND</p>
           </div>
           <div className={clsx(styles.homeTitle, styles.typeBorder)}>
-            <p className={styles.textBorder} style={{ transform: `translate3d(${titleOffset}px, 0, 0)` }}>PARK SOO HWI</p>
-            <p className={`${styles.textBorder}`} style={{ transform: `translate3d(-${titleOffset}px, 0, 0)` }}>FRONTEND</p>
+            <p className={styles.text} style={{ transform: `translate3d(${titleOffset}px, 0, 0)` }}>PARK<br/> SOO HWI</p>
+            <p className={styles.text} style={{ transform: `translate3d(-${titleOffset}px, 0, 0)` }}>FRONTEND</p>
           </div>
         </div>
         {/* //타이틀 */}

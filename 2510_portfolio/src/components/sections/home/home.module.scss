@@ -8,43 +8,32 @@
  * home/home.module.scss
 **/
 
+//< 애니메이션
+@include mixin.keyframes(floating) {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-1rem); }
+  100% { transform: translateY(0); }
+}
+//> 애니메이션
+
+
 .home {
   display: flex;
   align-items: center;
   height: 200vh;
   @include mixin.font('1.5rem' center);
   @include mixin.linear-gradient(#f5f5f7, #c4d8f6, #d8c4f6, #f5f5f7);
-  // background-image: linear-gradient(to bottom, $color_main, #cdccfb, #c5d4fe, #c0dafd, #bfe0fb, #c6e3fa, #cde6f9, #d4e9f8, #dfebf9, #e8eef8, #eff1f8, $color_bg);
-  // background-image: linear-gradient(to bottom, #c4d8f6, #c5d5f8, #c8d2f9, #cbcef9, #d0caf8, #d4ccf8, #d8cff8, #dcd1f8, #e1daf9, #e6e4f9, #edecf8, #f5f5f7);
-  // light: #F5F5F7, #D8C4F6
-  // dark: #282D36, #0A153D
 
   &Inner {
     position: relative;
     z-index: 1;
     width: 100%;
     height: 100%;
-    pointer-events: none;
 
     &.typeAbsolute {
       .homeTitleBox .homeTitle,
       .homeVisual .moonBox {
         position: absolute;
-      }
-    }
-
-    .dim {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      opacity: 0;
-      background-image: linear-gradient(to bottom, #000, #f5f5f7);
-      @include mixin.transition(all $transition_slower);
-
-      &.visible {
-        opacity: 1;
       }
     }
   }
@@ -55,26 +44,31 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    @include mixin.font($color_white 900 '15rem');
+    @include mixin.font($color_white 900 '15rem' [$font_point]);
     opacity: 0;
-    pointer-events: none;
     @include mixin.transition(opacity $transition_slow);
+    pointer-events: none;
 
     .homeTitle {
       position: fixed;
-      top: 25vh;
+      top: 50vh;
       width: 100%;
+      @include mixin.transform(translateY(-50%));
 
-      > p {
+      .text {
         @include mixin.transform(translate3d(-10vw, 0, 0));
         @include mixin.transition(transform .03s linear);
         will-change: transform;
+
+        br {
+          display: none;
+        }
       }
 
       &.typeBorder {
         z-index: 1;
 
-        > p {
+        > .text {
           color: transparent;
           -webkit-text-stroke: .5rem $color_white;
         }
@@ -84,13 +78,47 @@
     &.visible {
       opacity: 1;
     }
+
+    @include mixin.media(L) {
+      pointer-events: auto;
+      font-size: 10rem;
+    }
+
+    @include mixin.media(S) {
+      pointer-events: auto;
+      font-size: 5rem;
+
+      .homeTitle {
+        > .text {
+          &:first-child {
+            padding-left: 1rem;
+            text-align: left;
+          }
+
+          &:last-child {
+            padding-right: 1rem;
+            text-align: right;
+          }
+
+          br {
+            display: block;
+          }
+        }
+
+        &.typeBorder {
+          > .text {
+            -webkit-text-stroke: .2rem $color_white;
+          }
+        }
+      }
+    }
   }
 
   // 컨텐츠 내용
   &Content {
     position: relative;
     z-index: 1;
-    @include mixin.font($color_secondary_dark 500 '2rem/3rem');
+    @include mixin.font($gray_600 700 '2rem/3rem');
     opacity: 0;
     @include mixin.transform(translateY(10rem));
     @include mixin.transition(all $transition_slow);
@@ -101,13 +129,14 @@
       gap: 3rem 0;
       padding: 8rem 2rem;
       width: 70vw;
+      word-break: keep-all;
       border-radius: 3rem;
-      // background-color: $color_white;
+      background-color: rgba($color_white, .5);
 
       strong {
         margin: 0 1rem;
-        @include mixin.font(700 '3rem');
-        @include mixin.background(linear-gradient(90deg, $color_main, $color_secondary, $color_bg, #a6b8d2) '/300% 50%');
+        @include mixin.font(900 '3rem');
+        @include mixin.background(linear-gradient(90deg, #2f2937, #588b9d, #4e415f, #a6b8d2) '/300% 50%');
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: gradientMove 4s ease infinite;
@@ -123,6 +152,32 @@
     &.visible {
       opacity: 1;
       @include mixin.transform(translateY(0));
+    }
+
+    @include mixin.media(L) {
+      line-height: 4rem;
+
+      .homeContentInner {
+        gap: 5rem 0;
+        width: 90vw;
+
+        strong {
+          display: block;
+        }
+      }
+    }
+
+    @include mixin.media(S) {
+      @include mixin.font('1.5rem/3rem');
+
+      .homeContentInner {
+        gap: 3rem 0;
+        padding: 4rem 1rem;
+
+        strong {
+          font-size: 2rem;
+        }
+      }
     }
   }
 
@@ -159,13 +214,15 @@
 
         @include mixin.media(S) {
           font-size: 1.2rem;
-        }
-      }
 
-      @include mixin.keyframes(floating) {
-        0%   { transform: translateY(0); }
-        50%  { transform: translateY(-1rem); }
-        100% { transform: translateY(0); }
+          + div {
+            top: 50% !important;
+            left: 50% !important;
+            width: 80% !important;
+            height: 80% !important;
+            @include mixin.transform(translate(-50%, -50%));
+          }
+        }
       }
 
       canvas {
@@ -200,3 +257,49 @@
     }
   }
 }
+
+// 다크/라이트 모드 버튼
+.themeToggle {
+  box-shadow: 0 .1rem .4rem .2rem rgba(0, 0, 0, 0.08);
+  position: fixed;
+  z-index: $zIndex_floating;
+  right: 2rem;
+  bottom: 2rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  @include mixin.linear-gradient(#c4d8f6, #c4d8f6, #d8c4f6);
+  animation: floating 3s ease-in-out infinite;
+
+  .icon {
+    width: 3rem;
+    height: 3rem;
+    @include mixin.svg($color_white url('/assets/icon/icon_theme.svg') '/3rem' no-repeat);
+  }
+
+  &:hover {
+    .icon {
+      background-color: var(--color-main-dark);
+    }
+  }
+}
+
+//< 다크모드
+[data-theme='dark'] {
+  .home {
+    @include mixin.linear-gradient(#2f2937, #588b9d, #4e415f, #2f2937);
+
+    &Content {
+      color: $color_white;
+
+      strong {
+        @include mixin.background(linear-gradient(90deg, #f5f5f7, #c4d8f6, #d8c4f6, #a6b8d2) '/300% 50%');
+      }
+
+      &Inner {
+        background-color: rgba($color_black, .6);
+      }
+    }
+  }
+}
+//> 다크모드
