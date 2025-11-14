@@ -40,6 +40,47 @@ export const ProjectDetailData: ProjectDetail[] = [
     title: `포트폴리오`,
     link: ``,
     git: ``,
+    overview:
+      `WebGL과 3D 요소를 활용해 시각적 몰입감을 강화한 포트폴리오 웹사이트입니다. Three.js 기반으로 반응형 인터랙션, 라이트/다크 테마, 애니메이션을 적용했습니다.`,
+    purpose:
+      `정적인 이력서 페이지를 넘어, 사용자 경험을 고려한 인터랙티브한 프론트엔드 포트폴리오를 만들고자 기획한 프로젝트입니다.
+      3D 오브젝트와 마우스/스크롤 이벤트에 반응하는 시각 요소들을 직접 구현하며, 디자인과 퍼포먼스를 균형 있게 고려하는 데에 집중했습니다.`,
+    thumbnail: '/assets/images/portfolio/portfolio.png',
+    features: [
+      `Three.js + React Three Fiber 기반 3D 달 오브젝트 구현`,
+      `마우스 위치에 따라 별 배경의 패럴랙스 효과 구현`,
+      `스크롤 기반 인터랙션 - 타이틀 및 콘텐츠 요소 순차 노출`,
+      `다크모드 / 라이트모드 토글 구현 (localStorage에 상태 저장)`,
+      `반응형 레이아웃 설계로 PC 및 모바일 환경 모두 최적화`,
+      `SCSS 모듈 + 커스텀 믹스인 기반 스타일링으로 유지보수성 향상`,
+    ],
+    techStack: [
+      `React + TypeScript + Vite`,
+      `Three.js + @react-three/fiber + @react-three/drei`,
+      `SCSS Modules + 커스텀 Mixin + Media Query 대응`,
+      `IntersectionObserver / Scroll 이벤트 기반 인터랙션`,
+      `3D 오브젝트와 마우스 움직임 연동 처리 (mousemove)`,
+      `컴포넌트 구조 분리 (3D, 레이아웃, 섹션 등 기능 단위)`,
+    ],
+    issues: [
+      {
+        title: ``,
+        summary:``,
+        cause: [
+          ``
+        ],
+        img: ``,
+        solution: [
+          ``,
+        ]
+      },
+    ],
+    reflection: [
+      `기존에 익숙한 마크업 중심에서 벗어나, React와 Three.js, TypeScript를 활용한 구조적 개발에 접근했습니다.
+        3D 배경 구현, 테마 토글, 반응형 레이아웃, 접근성 처리 등 다양한 기능을 설계하고 개발하며 컴포넌트 중심 사고와 사용자 중심 UI 설계 역량을 키웠습니다.
+        커스텀 훅을 통한 상태 관리, 공통 모달 처리 등의 설계를 통해 재사용성과 확장성의 중요성을 체감했습니다.
+        3D 그래픽 처리, 애니메이션 타이밍 제어, 사용자 접근성 향상 등 실무에서 마주할 수 있는 이슈를 해결하면서, 프론트엔드 개발자로서의 문제 해결력과 구조적 사고 능력을 높였습니다.`
+    ]
 
   },
   {
