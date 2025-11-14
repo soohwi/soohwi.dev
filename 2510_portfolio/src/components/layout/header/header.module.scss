@@ -29,9 +29,9 @@
     padding: .5rem 1rem;
     width: min(70vw, 110rem);
     min-height: 6rem;
-    @include mixin.font($color_white 700 [$font_mono]);
+    @include mixin.font($color_white 700 [$font_point]);
     border-radius: 1.5rem;
-    background-color: rgba($color_main, .7);
+    background-color: rgba(var(--color-main-rgb), 0.7);
     backdrop-filter: blur(3px);
     @include mixin.transition(all $transition_slow);
 
@@ -44,7 +44,7 @@
     }
 
     &:hover {
-      background-color: $color_main;
+      background-color: var(--color-main);
     }
 
     // 로고
@@ -151,7 +151,7 @@
   padding: 4rem 2rem 2rem;
   height: calc(100vh - 2rem);
   border-radius: 1.5rem;
-  background-color: $color_main;
+  background-color: var(--color-main);
   opacity: 0;
   pointer-events: none;
   @include mixin.transition(opacity $transition_slow);
@@ -162,7 +162,7 @@
     gap: 2.5rem;
 
     a {
-      @include mixin.font($color_white '2rem' $font_mono);
+      @include mixin.font($color_white '2rem' $font_point);
 
       &:hover {
         color: $color_pointer;

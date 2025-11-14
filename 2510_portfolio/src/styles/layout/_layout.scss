@@ -9,6 +9,7 @@
 
 * {
   font-family: $font_primary;
+  @include mixin.transition(background-color 0.3s ease, color 0.3s ease);
 }
 
 :root {
@@ -57,10 +58,14 @@
 // 공통 타이틀
 .hwiTitle {
   margin-bottom: 4rem;
-  @include mixin.font(700 '5.5rem/1.4' [$font_mono]);
+  @include mixin.font($gray_800 700 '5.5rem/1.4' [$font_point]);
 
   @include mixin.media(S) {
     margin-bottom: 2rem;
     font-size: 2.5rem;
+  }
+
+  [data-theme='dark'] & {
+    color: $gray_100;
   }
 }

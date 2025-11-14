@@ -5,48 +5,51 @@
  * font-size: body, button, tag
 **/
 
+//< 테마컬러
+:root {
+  --color-bg: #f5f5f7;
+  --color-sub: #c4d8f6;
+
+  --color-main: #d8c4f6;
+  --color-main-rgb: 216, 196, 246;
+  --color-main-dark: #291853;
+
+  --color-secondary: #a7c699;
+  --color-tertiary: #d0dbeb;
+
+  --bg-content: #fff;
+}
+
+[data-theme="dark"] {
+  --color-bg: #2f2937;
+  --color-sub: #588b9d;
+
+  --color-main: #4e415f;
+  --color-main-rgb: 216, 196, 246;
+  --color-main-dark: #291853;
+
+  --color-secondary: #a7c699;
+  --color-tertiary: #d0dbeb;
+
+  --bg-content: #fff;
+}
+//> 테마컬러
+
 //< 컬러
-// 기본
-$color_bg: #f5f5f7;
-$color_main: #d8c4f6;
-$color_main_light: #e3ddf9;
-// $color_main_dark: ;
-
-$color_secondary: #a7c699;
-$color_secondary_dark: #291853;
-
-$color_tertiary: #d0dbeb;
-
+$warning: #ffad1f;
 $color_pointer: #f9f871;
 
+// 그레이 스케일
+$color_white: #fff;
+$color_black: #1d1d1d;
 $gray_50: #f5f5f7;
 $gray_100: #e2e2e3;
 $gray_150: #d1d1d6;
 $gray_200: #c4c2ca;
 $gray_300: #999;
 $gray_500: #96a7c0;
+$gray_600: #736e79;
 $gray_800: #4a4854;
-
-// // === 의미 색상 ===
-// $success: #00ba7c;
-// $danger: #f4212e;
-$warning: #ffad1f;
-// $info: $twitter-blue;
-// $color_negative_base: #ee4f10;
-// $color_positive_base: $color_tertiary_base;//$color_main;
-
-// 그레이 스케일
-// $gray_50: #f7f9fa;
-// $gray_100: #f1f3f4;
-// $gray_200: #e1e8ed;
-// $gray_300: #cfd9de;
-// $gray_400: #aab8c2;
-// $gray_600: #66757f;
-// $gray_700: #536471;
-// $gray_800: #3c4043;
-// $gray_900: #202124;
-$color_white: #fff;
-$color_black: #1d1d1d;
 //> 컬러
 
 //< 디자인
@@ -74,7 +77,7 @@ $transition_slower: .8s ease-in-out;
 //< 텍스트
 // 폰트
 $font_primary: 'PretendardVariable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', 'Roboto', sans-serif;
-$font_mono: 'Roboto Mono', 'JetBrains Mono', 'SF Mono', Monaco, Inconsolata, 'Source Code Pro', monospace;
+$font_point: 'BagelFatOne', 'PretendardVariable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', 'Roboto', sans-serif;
 
 // ir-blind
 .ir-blind {
@@ -93,129 +96,9 @@ $font_mono: 'Roboto Mono', 'JetBrains Mono', 'SF Mono', Monaco, Inconsolata, 'So
 //< 사이즈
 // 최소사이즈
 $minWidth_base: 136rem;// mobile 320px
-// $minWidth_base: 1520px;
-// $minWidth_extend: $minWidth_base + (106 * 2);// pc 좌/우 날개배너 확장
 
 // 모달
 $modal_header_height: 7rem;
 $modal_side_margin: 4rem;
 $modal_inner_padding: 3rem;
-// $modal_width_base: 500px;
-// $modal_width_sm: 412px;
-// $modal_width_lg: 700px;
-// $modal_width_xl: 920px;
 //> 사이즈
-
-//< 레이아웃
-// 단계: min, base, extend
-
-// header
-// $header_height_base: 8rem;
-// $header_height_sm: var(--header_height_sm);
-// $color_header: var(--color_header);
-
-// footer
-// $footer_height_base: var(--footer_height_base);
-
-// grid
-
-// sidebar
-// $sidebar_content_base: 56px;
-// $sidebar_content_sm: 44px;
-
-
-// skeleton
-// $skeleton_color_base: #eee;
-
-// bom
-//> 레이아웃
-
-//< 폼
-// 단계: sm, base, lg
-
-// 기본 형태
-
-// $form_borderRadius_base: 3px;
-// $form_color_base: #101010;
-// $form_color_negative: #ff4800;
-// $form_fontSize_base: 1.4rem;
-// $form_fontSize_lg: 15px;
-// $form_clear_base: 44px;
-
-// 텍스트 인풋
-// $form_text_height_base: 46px;
-// $form_text_height_lg: 50px;
-// $form_textarea_lineheight: ($form_fontSize_base + 0.8rem);// 계산식에 사용되어 괄호필요
-
-// 체크박스
-// $form_check_height_base: 20px;
-// $form_check_fontSize_base: 1.4rem;
-
-// 라디오
-// $form_radio_height_base: 20px;
-// $form_radio_fontSize_base: 1.4rem;
-
-// 셀렉트
-// $form_select_height_base: 46px;
-// $form_select_height_sm: 32px;
-// $form_select_fontSize_base: 1.4rem;
-// $form_select_fontSize_sm: 14px;
-
-// 파일
-// $form_file_clear: $form_text_height_base - 6px;
-
-// 이미지
-// $form_image_clear: 22px;
-//> 폼
-
-//< 페이지네이션
-// $pagination_height_base: 25px;
-//> 페이지네이션
-
-
-
-// // === 텍스트 색상 ===
-// $text-primary: #0f1419;
-// $text-secondary: #536471;
-// $text-tertiary: #8b98a5;
-// $text-disabled: #aab8c2;
-// $text-inverse: $white;
-
-// // === 배경 색상 ===
-// $background-primary: $white;
-// $background-secondary: $gray_50;
-// $background-tertiary: $gray_100;
-
-// // === 테두리 색상 ===
-// $border-light: #eff3f4;
-// $border-normal: #e1e8ed;
-// $border-dark: #cfd9de;
-
-// // === 버튼 관련 ===
-// $btn-border-radius: 50px;
-// $btn-padding: 10px 20px;
-// $focus-outline-color: $twitter-blue;
-
-// // === 그림자 ===
-// $shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-// $shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-// $shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
-// $shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.3);
-
-// // === 브레이크포인트 ===
-// $breakpoint-sm: 640px;
-// $breakpoint-md: 768px;
-// $breakpoint-lg: 1024px;
-// $breakpoint-xl: 1280px;
-// $breakpoint-2xl: 1536px;
-
-//< 반응형
-// $breakpoints: (
-//   'mobile': 479px,
-//   'tablet': 767px,
-//   'tablet-lg': 1023px,
-//   'desktop': 1279px,
-//   'desktop-lg': 1280px
-// );
-//> 반응형
-

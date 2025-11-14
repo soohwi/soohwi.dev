@@ -11,12 +11,12 @@
 //< 레이아웃
 .skills {
   padding-block: $section_padding_block;
-  background-color: $color_bg;
+  background-color: var(--color-bg);
 
   &Box {
     padding: 8rem 0;
     border-radius: $borderRadius_base;
-    background-color: $color_white;
+    background-color: var(--bg-content);
 
     @include mixin.media(S) {
       padding: 5rem 0 2rem;
@@ -62,7 +62,7 @@
     padding: 3rem;
     min-height: 20rem;
     border-radius: $borderRadius_base;
-    background-color: $color_bg;
+    background-color: var(--color-bg);
 
     @include mixin.media(L) {
       padding: 2.5rem;
@@ -138,6 +138,7 @@
 
       @include mixin.media(L) {
         display: block;
+        position: initial;
         margin: .6rem 0 -1.6rem;
       }
 
