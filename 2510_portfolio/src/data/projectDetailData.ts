@@ -39,12 +39,12 @@ export const ProjectDetailData: ProjectDetail[] = [
     id: `portfolio`,
     title: `포트폴리오`,
     link: ``,
-    git: ``,
+    git: `https://github.com/soohwi/portfolio/tree/master/2510_portfolio`,
     overview:
-      `WebGL과 3D 요소를 활용해 시각적 몰입감을 강화한 포트폴리오 웹사이트입니다. Three.js 기반으로 반응형 인터랙션, 라이트/다크 테마, 애니메이션을 적용했습니다.`,
+      `WebGL과 3D 요소를 활용해 시각적 몰입감을 입힌 포트폴리오 웹사이트입니다. 반응형 인터랙션, 라이트/다크 테마, 애니메이션을 적용했습니다.`,
     purpose:
       `정적인 이력서 페이지를 넘어, 사용자 경험을 고려한 인터랙티브한 프론트엔드 포트폴리오를 만들고자 기획한 프로젝트입니다.
-      3D 오브젝트와 마우스/스크롤 이벤트에 반응하는 시각 요소들을 직접 구현하며, 디자인과 퍼포먼스를 균형 있게 고려하는 데에 집중했습니다.`,
+      3D 오브젝트와 마우스/스크롤 이벤트에 반응하는 시각 요소들을 구현하며, 디자인과 퍼포먼스를 균형 있게 고려하는 데에 집중했습니다.`,
     thumbnail: '/assets/images/portfolio/portfolio.png',
     features: [
       `Three.js + React Three Fiber 기반 3D 달 오브젝트 구현`,
@@ -52,7 +52,7 @@ export const ProjectDetailData: ProjectDetail[] = [
       `스크롤 기반 인터랙션 - 타이틀 및 콘텐츠 요소 순차 노출`,
       `다크모드 / 라이트모드 토글 구현 (localStorage에 상태 저장)`,
       `반응형 레이아웃 설계로 PC 및 모바일 환경 모두 최적화`,
-      `SCSS 모듈 + 커스텀 믹스인 기반 스타일링으로 유지보수성 향상`,
+      `공통 모달 컴포넌트와 커스텀 훅(useModal) 설계로 애니메이션 처리 및 상태 관리를 일관되게 구현`,
     ],
     techStack: [
       `React + TypeScript + Vite`,
@@ -98,6 +98,7 @@ export const ProjectDetailData: ProjectDetail[] = [
       `Firebase Auth를 통한 이메일/비밀번호 로그인 및 GitHub OAuth`,
       `실시간 트윗 스트리밍 (Firestore onSnapshot)`,
       `트윗 작성/수정/삭제 (이미지 업로드 포함)`,
+
       `본인 트윗만 수정/삭제 가능한 권한 제어`,
       `프로필 이미지 업로드 (base64 처리)`,
       `반응형 대응 (모바일 중심)`,
