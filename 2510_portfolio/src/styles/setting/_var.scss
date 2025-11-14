@@ -18,6 +18,9 @@
   --color-tertiary: #d0dbeb;
 
   --bg-content: #fff;
+
+  --lightTheme-dark: #4a4854;
+  --lightTheme-light: #c4c2ca;
 }
 
 [data-theme="dark"] {
@@ -31,7 +34,10 @@
   --color-secondary: #a7c699;
   --color-tertiary: #d0dbeb;
 
-  --bg-content: #fff;
+  --bg-content: #c4c2ca;
+
+  --lightTheme-dark: #e2e2e3;
+  --lightTheme-light: #4a4854;
 }
 //> 테마컬러
 

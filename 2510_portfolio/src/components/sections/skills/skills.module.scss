@@ -29,7 +29,7 @@
 
   &Sub {
     margin-bottom: 2rem;
-    @include mixin.font(700 '2rem');
+    @include mixin.font($gray_800 700 '2rem');
 
     @include mixin.media(S) {
       margin-bottom: 1rem;
@@ -149,3 +149,11 @@
   }
 }
 //> 스킬 리스트
+
+//< 다크모드
+[data-theme='dark'] {
+  .skillsComp {
+    color: $gray_100;
+  }
+}
+//> 다크모드

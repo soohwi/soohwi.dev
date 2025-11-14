@@ -21,15 +21,7 @@
 
   &Mark {
     position: relative;
-    color: $gray_800;
-    &::before {
-      content: '(';
-      font-size: 1rem;
-    }
-    &::after {
-      content: ')';
-      font-size: 1rem;
-    }
+    @include mixin.font($gray_300 '2rem/1.2');
   }
 
   &List {

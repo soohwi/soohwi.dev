@@ -8,6 +8,7 @@
  * project/project.module.scss
 **/
 
+
 //< 레이아웃 & 공통
 .project {
   padding-block: $section_padding_block;
@@ -48,7 +49,7 @@
     button {
       position: relative;
       padding: .5rem 1.5rem;
-      @include mixin.font($gray_200 '1.6rem');
+      @include mixin.font(var(--lightTheme-light) '1.6rem');
       @include mixin.transition(all $transition_normal);
 
       @include mixin.media(S) {
@@ -211,7 +212,7 @@
 
         .textTitle {
           margin-top: 1.5rem;
-          @include mixin.font(700 '2.4rem');
+          @include mixin.font(var(--lightTheme-dark) 700 '2.4rem');
           word-break: keep-all;
 
           @include mixin.media(S) {
@@ -424,7 +425,7 @@
     margin-top: 4rem;
     padding: $modal_inner_padding calc($modal_inner_padding - 1rem);
     border-radius: $borderRadius_base;
-    background-color: $color_white;
+    background-color: var(--bg-content);
   }
 
   // 이슈/개선/회고
@@ -459,6 +460,7 @@
         position: relative;
         margin-top: .5rem;
         padding-left: 1.5rem;
+        font-size: 1.6rem;
 
         @include mixin.media(S) {
           padding-left: 1rem;
@@ -471,7 +473,7 @@
           width: .4rem;
           height: .4rem;
           border-radius: 100%;
-          background-color: $gray_800;
+          background-color: $gray_600;
           content: '';
 
           @include mixin.media(S) {
@@ -483,41 +485,49 @@
       }
     }
 
-    ol.modalList {
-      counter-reset: issue;
+    // 문제 해결 사례
+    .issueList {
+      padding-left: 1rem;
 
-      li {
-        padding-left: 1rem;
-        counter-increment: issue;
+      @include mixin.media(S) {
+        padding-left: 0;
+      }
 
-        @include mixin.media(S) {
-          padding-left: 0;
+      > li {
+        &:not(:first-child) {
+          margin-top: 4rem;
         }
 
         .textIssueTitle {
           display: flex;
+          align-items: center;
           gap: .8rem;
+          padding-bottom: .5rem;
           font-weight: 700;
-
-          &::before {
-            margin-top: .1rem;
-            min-width: 2.1rem;
-            height: 2.1rem;
-            @include mixin.font($color_white '1.6rem/2.1rem' center);
-            border-radius: 100%;
-            background-color: var(--color-tertiary);
-            content: counter(issue);
-
-            @include mixin.media(S) {
-              min-width: 1.9rem;
-              height: 1.9rem;
-              @include mixin.font('1.2rem/2.1rem');
-            }
-          }
         }
 
-        .textIssueDesc {
-          padding-left: 2.9rem;
+        .textIssueContent {
+          display: grid;
+          gap: 1rem 0;
+          padding-left: 2.5rem;
+
+          dt {
+            font-weight: 700;
+
+            &::before {
+              margin: .4rem .4rem -.4rem 0;
+              width: 2rem;
+              height: 2rem;
+              @include mixin.svg($gray_600 url('/assets/icon/icon_sad.svg') '/2rem' no-repeat);
+              content: '';
+            }
+          }
+
+          .typeSolution {
+            dt::before {
+              @include mixin.svg(url('/assets/icon/icon_smile.svg'));
+            }
+          }
         }
 
         .textIssueImg {

@@ -4,6 +4,7 @@
 **/
 
 import styles from './career.module.scss';
+import clsx from 'clsx';
 import { careerData } from 'data/careerData';
 
 function Career() {
@@ -11,7 +12,7 @@ function Career() {
     <section id="career" className={styles.career}>
       <div className="hwiInner">
         {/* 타이틀 */}
-        <h3 className="hwiTitle">Career</h3>
+        <h3 className={clsx('hwiTitle', styles.careerTitle)}>Career</h3>
         {/*-- 타이틀 */}
 
         {/* 경력리스트 */}

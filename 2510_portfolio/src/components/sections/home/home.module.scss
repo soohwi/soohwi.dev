@@ -118,7 +118,7 @@
   &Content {
     position: relative;
     z-index: 1;
-    @include mixin.font($gray_600 700 '2rem/3rem');
+    @include mixin.font($gray_600 700 '2rem/4rem');
     opacity: 0;
     @include mixin.transform(translateY(10rem));
     @include mixin.transition(all $transition_slow);

@@ -69,3 +69,11 @@
   }
   //> 경력리스트
 }
+
+//< 다크모드
+[data-theme='dark'] {
+  .careerTitle {
+    color: $gray_100;
+  }
+}
+//> 다크모드

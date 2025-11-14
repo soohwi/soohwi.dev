@@ -74,7 +74,7 @@
 
     // 타이틀
     .modalTitle {
-      @include mixin.font($gray_800 700 '2rem');
+      @include mixin.font(var(--lightTheme-dark) 700 '2rem');
     }
 
     // 닫기버튼
@@ -85,7 +85,7 @@
       .icon {
         width: 100%;
         height: 100%;
-        @include mixin.svg($gray_800 url('/assets/icon/icon_close.svg') '/2.5rem' no-repeat);
+        @include mixin.svg(var(--lightTheme-dark) url('/assets/icon/icon_close.svg') '/2.5rem' no-repeat);
       }
 
       @include mixin.media(S) {
