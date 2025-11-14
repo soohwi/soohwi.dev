@@ -464,12 +464,13 @@
 
         @include mixin.media(S) {
           padding-left: 1rem;
+          font-size: 1.4rem;
         }
 
         &::before {
           position: absolute;
           top: 1rem;
-          left: 0;
+          left: .3rem;
           width: .4rem;
           height: .4rem;
           border-radius: 100%;
@@ -477,7 +478,7 @@
           content: '';
 
           @include mixin.media(S) {
-            top: .8rem;
+            top: .9rem;
             width: .3rem;
             height: .3rem;
           }
@@ -509,17 +510,31 @@
         .textIssueContent {
           display: grid;
           gap: 1rem 0;
-          padding-left: 2.5rem;
+          padding-left: 2.2rem;
+          word-break: keep-all;
+
+          @include mixin.media(S) {
+            padding-left: 1.5rem;
+          }
 
           dt {
+            display: flex;
+            align-items: center;
+            gap: 0 .4rem;
             font-weight: 700;
 
             &::before {
-              margin: .4rem .4rem -.4rem 0;
               width: 2rem;
               height: 2rem;
               @include mixin.svg($gray_600 url('/assets/icon/icon_sad.svg') '/2rem' no-repeat);
               content: '';
+
+              @include mixin.media(S) {
+                width: 1.8rem;
+                height: 1.8rem;
+                mask-size: 1.8rem;
+                -webkit-mask-size: 1.8rem;
+              }
             }
           }
 
@@ -528,11 +543,11 @@
               @include mixin.svg(url('/assets/icon/icon_smile.svg'));
             }
           }
-        }
 
-        .textIssueImg {
-          margin-top: 1rem;
-          padding-left: 2.9rem;
+          .issueImg {
+            margin-top: 1rem;
+            padding-left: 2.9rem;
+          }
         }
       }
     }
