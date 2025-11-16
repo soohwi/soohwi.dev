@@ -154,7 +154,7 @@ function ProjectCardModal({ item, detail }: ProjectCardModalProps) {
                       </dl>
                     )}
 
-                    <div className={styles.textIssueImg}>
+                    <div className={styles.issueImg}>
                       <img src={text.img} alt="코드 이미지" />
                     </div>
                   </div>

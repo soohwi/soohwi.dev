@@ -16,7 +16,7 @@ export interface ProjectItem {
 export const ProjectData: ProjectItem[] = [
   {
     id: 'portfolio',
-    imgSrc: '/assets/images/project/work_thumb-',
+    imgSrc: '/assets/images/project/work_thumb-portfolio.png',
     comp: '개인',
     title: '포트폴리오',
     period: '약 3주',

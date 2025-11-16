@@ -225,10 +225,10 @@ export const ProjectDetailData: ProjectDetail[] = [
           `public/font/ 폴더 하위의 .woff2 파일을 src 내부에서 직접 import 하려다 TypeScript에서 타입 오류 발생`,
           `Vite 환경에서는 public 폴더에 있는 자산은 url()로만 접근 가능하며, import 방식으로 직접 참조 불가`
         ],
-        img: `/assets/images/project/movieApp/font-issue.png`,
+        img: `/assets/images/movieApp/issue_font.png`,
         solution: [
           `.woff2 타입을 선언하기 위해 declarations.d.ts 파일에 타입 정의 추가`,
-          `GlobalStyle.ts에서 @font-face 선언 시 import 방식으로 적용`,
+          `GlobalStyle.ts에서 @font-face 선언 시 url()로 직접 선언`,
         ]
       },
       {
@@ -237,10 +237,11 @@ export const ProjectDetailData: ProjectDetail[] = [
         cause: [
           `CSS 마스크 방식에서는 url('/src/assets/...') 식의 절대경로 사용 시 Vite의 base 설정과 충돌이 발생해 배포 후 파일 경로를 제대로 참조하지 못함`
         ],
-        img: `/assets/images/project/movieApp/svg-issue.png`,
+        img: `/assets/images/project/movieApp/issue_svg.png`,
         solution: [
-          `CSS 마스크 방식을 제거하고, vite-plugin-svgr을 사용해 SVG를 React 컴포넌트로 import`,
-          `아이콘을 컴포넌트로 렌더링하여 스타일링`
+          `CSS 마스크 방식 제거`,
+          `vite-plugin-svgr을 설정해 SVG를 React 컴포넌트로 import하여 JSX에서 직접 사용`,
+          `스타일을 styled-components로 처리하여 유지 보수성 확보`
         ]
       },
       {
@@ -251,7 +252,7 @@ export const ProjectDetailData: ProjectDetail[] = [
           `description_full은 API 응답에 따라 존재하지 않을 수 있음`,
           `하지만 types/movie.ts에서는 모든 필드를 **필수(required)**로 정의하고 있어, 타입 검사와 렌더링 중 오류가 발생`
         ],
-        img: `/assets/images/project/movieApp/scroll-issue.png`,
+        img: `/assets/images/project/movieApp/issue_api.png`,
         solution: [
           `description_full을 optional 속성으로 수정`,
           `데이터 렌더링 시 fallback 처리`,
@@ -265,9 +266,10 @@ export const ProjectDetailData: ProjectDetail[] = [
           `API에서 제공하는 영화 설명은 길이에 제한이 없어 한 페이지에 너무 많은 텍스트가 노출됨`,
           `모바일 뷰에서 사용자 경험(UX) 저하`
         ],
-        img: `/assets/images/project/movieApp/svg-issue.png`,
+        img: `/assets/images/project/movieApp/issue_desc.png`,
         solution: [
-          `설명이 특정 길이 이상일 경우 잘라서 보여주고, "전체보기 / 접기" 버튼으로 토글 처리`
+          `설명 텍스트가 일정 길이 이상일 경우 잘라서 노출하고, 전체보기/접기 버튼을 통해 토글 기능 제공`,
+          `텍스트 길이 조건, 상태 관리를 통한 토글 구현으로 사용자 제어권 강화`
         ]
       }
     ],
