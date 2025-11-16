@@ -524,12 +524,14 @@
             font-weight: 700;
 
             &::before {
+              margin-bottom: .3rem;
               width: 2rem;
               height: 2rem;
               @include mixin.svg($gray_600 url('/assets/icon/icon_sad.svg') '/2rem' no-repeat);
               content: '';
 
               @include mixin.media(S) {
+                margin-bottom: .1rem;
                 width: 1.8rem;
                 height: 1.8rem;
                 mask-size: 1.8rem;

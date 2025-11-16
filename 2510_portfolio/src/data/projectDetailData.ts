@@ -237,7 +237,7 @@ export const ProjectDetailData: ProjectDetail[] = [
         cause: [
           `CSS 마스크 방식에서는 url('/src/assets/...') 식의 절대경로 사용 시 Vite의 base 설정과 충돌이 발생해 배포 후 파일 경로를 제대로 참조하지 못함`
         ],
-        img: `/assets/images/project/movieApp/issue_svg.png`,
+        img: `/assets/images/movieApp/issue_svg.png`,
         solution: [
           `CSS 마스크 방식 제거`,
           `vite-plugin-svgr을 설정해 SVG를 React 컴포넌트로 import하여 JSX에서 직접 사용`,
@@ -250,13 +250,13 @@ export const ProjectDetailData: ProjectDetail[] = [
         cause: [
           `API에서 genres는 영화에 따라 없거나 빈 배열일 수 있음`,
           `description_full은 API 응답에 따라 존재하지 않을 수 있음`,
-          `하지만 types/movie.ts에서는 모든 필드를 **필수(required)**로 정의하고 있어, 타입 검사와 렌더링 중 오류가 발생`
+          `초기에는 해당 필드를 필수(required)로 선언하여 타입 오류 및 렌더링 중 예외 발생`
         ],
-        img: `/assets/images/project/movieApp/issue_api.png`,
+        img: `/assets/images/movieApp/issue_api.png`,
         solution: [
-          `description_full을 optional 속성으로 수정`,
-          `데이터 렌더링 시 fallback 처리`,
-          `genre 접근 시 optional chaining 사용`
+          `MovieType에서 description_full을 optional로 변경`,
+          `데이터 사용 시 fallback 값( || summary || '' )으로 안전 처리`,
+          `장르 배열 접근 시 optional chaining( ?. )으로 안전하게 필터링 처리`
         ]
       },
       {
@@ -266,7 +266,7 @@ export const ProjectDetailData: ProjectDetail[] = [
           `API에서 제공하는 영화 설명은 길이에 제한이 없어 한 페이지에 너무 많은 텍스트가 노출됨`,
           `모바일 뷰에서 사용자 경험(UX) 저하`
         ],
-        img: `/assets/images/project/movieApp/issue_desc.png`,
+        img: `/assets/images/movieApp/issue_desc.png`,
         solution: [
           `설명 텍스트가 일정 길이 이상일 경우 잘라서 노출하고, 전체보기/접기 버튼을 통해 토글 기능 제공`,
           `텍스트 길이 조건, 상태 관리를 통한 토글 구현으로 사용자 제어권 강화`
