@@ -514,7 +514,7 @@
           word-break: keep-all;
 
           @include mixin.media(S) {
-            padding-left: 1.5rem;
+            padding-left: 0;
           }
 
           dt {
@@ -524,10 +524,10 @@
             font-weight: 700;
 
             &::before {
-              margin-bottom: .3rem;
+              margin-bottom: -.1rem;
               width: 2rem;
               height: 2rem;
-              @include mixin.svg($gray_600 url('/assets/icon/icon_sad.svg') '/2rem' no-repeat);
+              @include mixin.svg($gray_500 url('/assets/icon/icon_sad.svg') '/2rem' no-repeat);
               content: '';
 
               @include mixin.media(S) {
@@ -542,7 +542,7 @@
 
           .typeSolution {
             dt::before {
-              @include mixin.svg(url('/assets/icon/icon_smile.svg'));
+              @include mixin.svg($warning url('/assets/icon/icon_smile.svg'));
             }
           }
 
