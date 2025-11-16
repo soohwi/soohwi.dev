@@ -49,7 +49,7 @@ function ProjectCardModal({ item, detail }: ProjectCardModalProps) {
         )}
 
         {/* 링크버튼 */}
-        {detail?.link && detail?.git && (
+        {(detail?.link || detail?.git) && (
           <div className={styles.infoBtnGroup}>
             {detail?.link && (
               <a
