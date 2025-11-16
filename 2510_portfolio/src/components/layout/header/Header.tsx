@@ -15,16 +15,17 @@ function Header() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const $home = document.querySelector('#home');
-
       if (!$home) return;
 
-      const homeHeight = $home.offsetHeight - 120;
+      if ($home instanceof HTMLElement) {
+        const homeHeight = $home.offsetHeight - 120;
 
-      // home 영역 지나면 header show
-      if (scrollY > homeHeight) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+        // home 영역 지나면 header show
+        if (scrollY > homeHeight) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
       }
     };
 
