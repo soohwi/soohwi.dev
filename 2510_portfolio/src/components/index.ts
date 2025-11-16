@@ -1,4 +1,4 @@
-export { default as footer } from './footer/footer';
-export { default as header } from './header/header';
-export { default as project } from './project/project';
-export { default as skills } from './skills/skills';
+export { default as footer } from './layout/footer/Footer';
+export { default as header } from './layout/header/Header';
+export { default as project } from './sections/project/Project';
+export { default as skills } from './sections/skills/Skills';
