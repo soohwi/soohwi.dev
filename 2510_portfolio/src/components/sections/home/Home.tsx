@@ -38,8 +38,10 @@ function Home() {
       const offsetY = (e.clientY - innerHeight / 2) / 30;
 
       stars.forEach((star, i) => {
+        if (!(star instanceof HTMLElement)) return;// HTMLElement만 처리하여 타입 안정성 확보
+
         const speed = (i % 5 + 1) * 0.4;// 별마다 속도 다르게 주기
-        (star as HTMLElement).style.transform = `translate(${offsetX * speed}px, ${offsetY * speed}px)`;
+        star.style.transform = `translate(${offsetX * speed}px, ${offsetY * speed}px)`;
       });
     };
 
