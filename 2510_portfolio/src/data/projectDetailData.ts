@@ -65,44 +65,44 @@ export const ProjectDetailData: ProjectDetail[] = [
     issues: [
       {
         title: `ref 객체에 타입 오류 발생`,
-        summary:`Three.js mesh 요소에 ref를 사용할 때 타입 선언이 없어서 TypeScript에서 'Object is possibly null' 오류가 발생`,
+        summary:`Three.js mesh 요소에 ref를 사용할 때 타입 선언이 없어서 TypeScript에서 null 관련 오류 발생`,
         cause: [
-          `useRef에 기본적으로 null을 초기값으로 주었지만, 해당 ref에 대한 타입 명시가 생략됨`,
-          `Three.js의 Mesh 타입을 명확히 지정하지 않아 내부 속성 접근 시 타입 추론 실패`
+          `useRef를 사용할 때 초기값을 null로 설정하면서도 제네릭 타입을 명시하지 않아 ref.current의 타입 추론이 실패`,
+          `Mesh 객체의 속성(rotation 등)에 접근할 수 없어 'Object is possibly null' 오류 발생`
         ],
-        img: ``,
+        img: `/assets/images/portfolio/issue_ref.png`,
         solution: [
-          `useRef<Mesh>(null) 형태로 제네릭 타입 명시하여 ref 객체 타입을 명확하게 정의`,
-          `ref.current가 존재하는지 조건문으로 검사하거나 optional chaining 사용`,
-          `useFrame 등 내부에서 접근 시 항상 null 체크 처리`
+          `useRef<Mesh>(null) 형태로 타입을 명시하여 ref의 타입 안정성 확보`,
+          `ref.current가 존재하는지 확인 후 안전하게 접근`,
+          `useFrame 등에서 매 프레임마다 접근 시에도 null 체크 필수 적용`
         ]
       },
       {
         title: `SCSS 모듈 클래스 동적 처리 시 타입 오류`,
-        summary: `classnames(clsx) 사용 중 조건부 클래스명이 SCSS 모듈의 타입에 없다고 오류 발생`,
+        summary: `SCSS 모듈 사용 중 조건부 클래스 처리에서 존재하지 않는 키를 참조하여 TypeScript 타입 오류 발생`,
         cause: [
-          `styles['className'] 또는 styles.className 접근 방식에서 존재하지 않는 키 접근`,
-          `조건부 렌더링 로직에서 오타 또는 조건문 분기 처리가 잘못되어 타입 추론 실패`
+          `styles 객체에서 정의되지 않은 클래스명을 잘못 참조하거나 오타 발생`,
+          `조건부 렌더링 로직이 복잡할 경우 타입 추론이 실패하면서 컴파일 오류 발생`
         ],
-        img: ``,
+        img: `/assets/images/portfolio/issue_clsx.png`,
         solution: [
-          `SCSS 모듈의 타입 추론 강화를 위해 classnames 대신 clsx 사용`,
-          `모든 스타일 키에 대해 SCSS 모듈 타입이 자동 생성되도록 설정 (.d.ts 생성)`,
+          `타입 추론에 강한 clsx로 classnames 대체`,
+          `SCSS 모듈 타입 자동 생성을 위해 scss.d.ts 설정 추가`,
+          `모든 클래스 접근 시 정적 키(styles.key) 방식으로 타입 안정성 확보`
         ]
       },
       {
-        title: `라우터 경로별 컴포넌트가 리렌더링 되지 않음`,
-        summary: `React Router에서 같은 컴포넌트를 다른 경로에서 사용할 때, 내용이 변경되지 않는 현상 발생`,
+        title: `useEffect 내부 DOM 접근 오류`,
+        summary: `렌더링 직후 실행되는 useEffect 내부에서 아직 생성되지 않은 DOM 요소를 참조해 오류 발생`,
         cause: [
-          `컴포넌트가 동일하여 React가 diffing에서 동일한 것으로 인식하고 재렌더링하지 않음`,
-          `useEffect의 의존성에 location 또는 params가 포함되어 있지 않음`
+          `랜덤으로 렌더되는 별(star) 요소를 document.querySelectorAll로 즉시 탐색할 경우, 요소가 존재하지 않아 에러 발생 가능`,
+          `React의 useEffect는 렌더링 직후 실행되지만, 해당 시점에 DOM이 아직 완전히 마운트되지 않았을 수 있음`
         ],
-        img: ``,
+        img: `/assets/images/portfolio/issue_star.png`,
         solution: [
-          `useEffect에서 location.pathname 또는 route param을 의존성 배열에 추가`,
-          `key 속성을 location.pathname 또는 route id로 주어 컴포넌트를 강제로 리마운트`,
-          `페이지 전환 애니메이션 구현 시에도 유용하게 활용 가능`
-        ]
+          `의존성 배열을 빈 배열([])로 설정해 useEffect가 마운트 시점에만 실행되도록 함`,
+          `NodeList 내부 요소에 대해 instanceof HTMLElement 조건으로 안전하게 타입 검사`,
+        ],
       }
     ],
     reflection: [
