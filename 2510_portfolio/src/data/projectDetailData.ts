@@ -38,7 +38,7 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: `portfolio`,
     title: `포트폴리오`,
-    link: ``,
+    link: `https://soohwi-dev.web.app`,
     git: `https://github.com/soohwi/portfolio/tree/master/2510_portfolio`,
     overview:
       `WebGL과 3D 요소를 활용해 시각적 몰입감을 입힌 포트폴리오 웹사이트입니다. 반응형 인터랙션, 라이트/다크 테마, 애니메이션을 적용했습니다.`,
