@@ -150,36 +150,38 @@ export const ProjectDetailData: ProjectDetail[] = [
         title: `실시간 데이터 구독으로 수정/삭제 후 자동 반영 구현`,
         summary:`트윗 수정이나 삭제가 이루어져도 프로필 페이지의 트윗 목록에는 실시간으로 반영되지 않음`,
         cause: [
-          `기존에는 getDocs()로 트윗 목록을 단발성으로 조회했기 때문에, 변경 사항이 발생해도 새로고침을 하지 않는 이상 화면에 반영안됨`
+          `getDocs()는 서버 상태를 한 번만 받아오기 때문에, 트윗 수정/삭제 이후에도 화면에는 이전 상태가 그대로 유지됨`
         ],
-        img: ``,
+        img: `/assets/images/hwitter/issue_subscribe.png`,
         solution: [
-          `onSnapshot()을 활용해 Firebase Firestore의 컬렉션 변경 사항을 실시간으로 구독하도록 변경`,
-          `구독 중인 리스너는 unsubscribe()로 컴포넌트 언마운트 시 제거해 요금 최적화와 메모리 누수 방지`
+          `onSnapshot()을 이용해 Firestore 컬렉션을 실시간으로 구독`,
+          `userId 기준으로 필터링하고 최신 순 정렬, 25개 제한으로 쿼리 최적화`,
+          `컴포넌트 언마운트 시 unsubscribe() 호출로 구독 해제하여 리소스 낭비 방지`
         ]
       },
       {
         title: `Firebase에 undefined 필드 전송 시 에러 발생`,
         summary: `이미지 없이 트윗을 등록할 경우, fileData가 undefined로 전달되면서 Firebase addDoc() 함수에서 에러가 발생`,
         cause: [
-          `Firebase는 undefined 값을 허용하지 않기 때문에, 해당 필드를 명시적으로 제거하지 않으면 Unsupported field value: undefined 에러 발생`
+          `Firebase는 undefined 값을 문서 필드로 허용하지 않음`,
+          `명시적으로 제외 처리하지 않으면 'Unsupported field value: undefined' 오류 발생`
         ],
-        img: ``,
+        img: `/assets/images/hwitter/issue_file.png`,
         solution: [
-          `fileData가 undefined인 경우, 해당 필드를 제외하고 객체를 전송하도록 구조 분해 및 조건부 키 추가를 사용해 처리`
+           `값이 있을 때만 fileData 필드를 전송하도록 && 조건을 사용해 안전하게 처리`
         ]
       },
       {
         title: `verbatimModuleSyntax 활성화로 타입 import 에러 발생`,
-        summary: `TweetType과 같은 타입을 일반 import로 불러올 경우, TypeScript에서 에러가 발생해 컴파일이 중단`,
+        summary: `tsconfig에 verbatimModuleSyntax 옵션이 활성화되면서 타입을 일반 import로 불러올 경우 컴파일 에러가 발생`,
         cause: [
-          `tsconfig.json에 verbatimModuleSyntax: true 옵션이 활성화되어 있으면, 타입 전용 import는 반드시 import type을 사용해야 함`,
-          `일반 import로 타입을 가져오면 "is a type and must be imported using a type-only import" 에러가 발생`
+          `해당 옵션이 true일 경우, 타입 전용 데이터는 반드시 import type으로 가져와야 함`,
+          `일반 import 사용 시 'is a type and must be imported using a type-only import' 에러가 발생`
         ],
-        img: ``,
+        img: `/assets/images/hwitter/issue_type.png`,
         solution: [
-          `타입은 import type을 사용해 명확하게 타입 전용으로 가져오도록 수정`,
-          `verbatimModuleSyntax를 유지하면서도 컴파일 오류 없이 타입 안정성을 확보 가능`
+          `TweetType, Unsubscribe 등의 타입은 모두 import type으로 변경`,
+          `설정을 유지하면서도 타입 안전성과 코드 명확성을 확보`
         ]
       }
     ],
