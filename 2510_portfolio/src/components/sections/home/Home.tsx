@@ -11,12 +11,24 @@ import styles from './home.module.scss';
 import clsx from 'clsx';
 
 function Home() {
+  const [isMobile, setIsMobile] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
   const [hideTitle, setHideTitle] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [isTitleFixed, setIsTitleFixed] = useState(false);
   const [titleOffset, setTitleOffset] = useState(0);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  // 모바일인지 체크
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 760);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // 페이지 진입 후 100ms 후 애니메이션 트리거
   useEffect(() => {
@@ -121,7 +133,9 @@ function Home() {
               <ambientLight intensity={0.5} />
               <directionalLight position={[5, 5, 5]} />
               <Moon />
-              <OrbitControls enableZoom={false} enablePan={false} />
+              {!isMobile && (
+                <OrbitControls enableZoom={false} enablePan={false} />
+              )}
               <Stars radius={100} depth={50} count={500} factor={4} fade />
             </Canvas>
           </div>
