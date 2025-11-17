@@ -17,7 +17,7 @@
   scroll-behavior: smooth;
 
   body {
-    @include mixin.font(400 '1.4rem/1.47');
+    @include mixin.font(400 '1.4rem/1.47' [$font_primary]);
   }
 }
 
