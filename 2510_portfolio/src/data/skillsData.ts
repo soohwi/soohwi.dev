@@ -47,7 +47,7 @@ export const skillsData: SkillsItem[] = [
     skills: [
       { name: 'VS Code' },
       { name: 'Git' },
-      { name: 'GitLab' },
+      { name: 'GitHub' },
       { name: 'Figma' },
       { name: 'Adobe XD' }
     ]
@@ -65,7 +65,7 @@ export const skillsData: SkillsItem[] = [
         { text: '재사용성과 유지보수성 향상', bold: true }
       ],
       [
-        { text: 'JavaScript(ES6+) 기반 비동기 처리 및 렌더링 최적화 경험' }
+        { text: 'JavaScript 기반 비동기 처리 및 렌더링 최적화 경험' }
       ],
       [
         { text: '기획/디자인/백엔드와의 ' },

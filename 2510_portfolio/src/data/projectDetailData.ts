@@ -38,7 +38,6 @@ export const ProjectDetailData: ProjectDetail[] = [
   {
     id: `portfolio`,
     title: `포트폴리오`,
-    link: `https://soohwi-dev.web.app`,
     git: `https://github.com/soohwi/portfolio/tree/master/2510_portfolio`,
     overview:
       `WebGL과 3D 요소를 활용해 시각적 몰입감을 입힌 포트폴리오 웹사이트입니다. 반응형 인터랙션, 라이트/다크 테마, 애니메이션을 적용했습니다.`,
@@ -291,7 +290,7 @@ export const ProjectDetailData: ProjectDetail[] = [
       `스타일 변수와 디자인 시스템이 통일되지 않아 디자인 일관성 유지가 어려운 환경`,
     ],
     solution: [
-      `Vue.js 기반으로 UI를 컴포넌트 단위로 구조화헤 재사용성과 유지보수성을 강화`,
+      `Vue.js 기반으로 UI를 컴포넌트 단위로 구조화해 재사용성과 유지보수성을 강화`,
       `SCSS 변수 및 mixin을 체계화해 디자인 시스템을 표준화하고 일관된 스타일 유지`,
       `주 1회 협업 미팅 및 개발 가이드 문서화를 통해 코드 일관성과 품질을 안정적으로 관리`,
     ],
