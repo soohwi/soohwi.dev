@@ -10,7 +10,7 @@ import { useTexture } from "@react-three/drei";
 
 const Moon = () => {
   const moonRef = useRef<Mesh>(null);
-  const moonTexture = useTexture("/assets/images/home/moon.jpg");// 달 이미지 씌우기
+  const moonTexture = useTexture("/assets/images/home/moon_bg.jpg");// 달 이미지 씌우기
 
   // useFrame으로 프레임마다 회전시키기
   useFrame(() => {

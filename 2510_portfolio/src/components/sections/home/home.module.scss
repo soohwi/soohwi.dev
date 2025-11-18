@@ -232,6 +232,23 @@
           pointer-events: none;
         }
       }
+
+      // 모바일용
+      .moonImageBox {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+
+        .moonImage {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          padding-top: 80%;
+          width: 80%;
+          @include mixin.transform(translate(-50%, -50%));
+          @include mixin.background(url('/assets/images/home/moon.png') '/contain' no-repeat);
+        }
+      }
     }
 
     .starsBox {

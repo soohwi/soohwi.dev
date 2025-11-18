@@ -125,19 +125,24 @@ function Home() {
         {/* 배경 (별/달) */}
         <div className={styles.homeVisual}>
           <div className={styles.moonBox}>
-            <p className={styles.moonInfo}><i className={styles.icon}></i>드래그로 달을 움직여 보세요 !</p>
-            <Canvas
-              style={{ position: "absolute", top: 0, left: 0 }}
-              camera={{ position: [0, 0, 5], fov: 60 }}
-            >
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[5, 5, 5]} />
-              <Moon />
-              {!isMobile && (
-                <OrbitControls enableZoom={false} enablePan={false} />
-              )}
-              <Stars radius={100} depth={50} count={500} factor={4} fade />
-            </Canvas>
+            {isMobile ? (
+              <div className={styles.moonImageBox}>
+                <i className={styles.moonImage} title="달 이미지"></i>
+              </div>
+            ) : (
+              <>
+                <p className={styles.moonInfo}><i className={styles.icon}></i>드래그로 달을 움직여 보세요 !</p>
+                <Canvas
+                  style={{ position: "absolute", top: 0, left: 0 }}
+                  camera={{ position: [0, 0, 5], fov: 60 }}
+                >
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[5, 5, 5]} />
+                  <Moon />
+                  <OrbitControls enableZoom={false} enablePan={false} />
+                </Canvas>
+              </>
+            )}
           </div>
           <div className={styles.starsBox}>
             {Array.from({length: 150}).map((_, i) => (
